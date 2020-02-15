@@ -1,0 +1,29 @@
+PODS:
+  - Yoga (1.14.0)
+  - YogaKit (1.18.1):
+    - Yoga (~> 1.14)
+
+DEPENDENCIES:
+  - YogaKit (from `https://github.com/GSukh/yoga.git`, commit `9918b4fd76ed53f20e1254373ada1fb64b209bbf`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Yoga
+
+EXTERNAL SOURCES:
+  YogaKit:
+    :commit: 9918b4fd76ed53f20e1254373ada1fb64b209bbf
+    :git: https://github.com/GSukh/yoga.git
+
+CHECKOUT OPTIONS:
+  YogaKit:
+    :commit: 9918b4fd76ed53f20e1254373ada1fb64b209bbf
+    :git: https://github.com/GSukh/yoga.git
+
+SPEC CHECKSUMS:
+  Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
+  YogaKit: 0e730523c8b070562a389e47713d38debbc62129
+
+PODFILE CHECKSUM: 7860f5e35da9ae8cfad385468938d35977d6cfb9
+
+COCOAPODS: 1.5.3
