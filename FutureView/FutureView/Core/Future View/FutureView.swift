@@ -9,8 +9,8 @@
 import UIKit
 import YogaKit
 
-typealias TextViewModel = FutureView<UILabel>
-typealias ImageViewModel = FutureView<UIImageView>
+typealias FutureButton = FutureView<UIButton>
+typealias FutureImageView = FutureView<UIImageView>
 
 class FutureView<ViewType: UIView>: EmptyFutureView {
     
@@ -71,6 +71,11 @@ class FutureView<ViewType: UIView>: EmptyFutureView {
         if let view = view {
             viewConfigurator.configure(view: view)
         }
+    }
+    
+    override func configureViewsTree() {
+        super.configureViewsTree()
+        configureView()
     }
     
     func prepareForReuse() {

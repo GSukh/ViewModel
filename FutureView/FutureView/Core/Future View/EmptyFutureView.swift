@@ -18,7 +18,7 @@ class EmptyFutureView: NSObject {
     fileprivate(set) var bounds: CGRect = .zero
     private var layoutIsValid = false
     
-    private(set) var submodeles: [EmptyFutureView] = []
+    private(set) var subviews: [EmptyFutureView] = []
     
     
     override init() {
@@ -27,24 +27,25 @@ class EmptyFutureView: NSObject {
         yoga.isEnabled = true
     }
     
-    func add(_ submodel: EmptyFutureView) {
-        submodeles.append(submodel)
+    func add(_ subview: EmptyFutureView) {
+        subviews.append(subview)
     }
     
     func configureLayout(withBlock block: (YGLayout) -> ()) {
         block(yoga)
+        invalidateLayout()
     }
     
     
     func bind(toContainer container: UIView, withViewStorage viewStorage: ViewStorage?) {
-        for submodel in submodeles {
-            submodel.bind(toContainer: container, withViewStorage: viewStorage)
+        for subview in subviews {
+            subview.bind(toContainer: container, withViewStorage: viewStorage)
         }
     }
     
     func unbind(withViewStorage viewStorage: ViewStorage?) {
-        for submodel in submodeles {
-            submodel.unbind(withViewStorage: viewStorage)
+        for subview in subviews {
+            subview.unbind(withViewStorage: viewStorage)
         }
     }
     
@@ -54,7 +55,7 @@ class EmptyFutureView: NSObject {
     
     func layout(with containerSize: CGSize) {
         self.bounds = CGRect(origin: .zero, size: containerSize)
-        yoga.applyLayout(preservingOrigin: false, dimensionFlexibility: .flexibleHeight)
+        yoga.applyLayout(preservingOrigin: false)
         layoutIsValid = false
     }
     
@@ -66,19 +67,20 @@ class EmptyFutureView: NSObject {
     
     func invalidateLayout() {
         layoutIsValid = false
+        yoga.markDirty()
     }
     
     func needsLayout() -> Bool {
         guard layoutIsValid else { return true }
         
-        for submodel in submodeles {
-            if !submodel.layoutIsValid {
+        for subview in subviews {
+            if !subview.layoutIsValid {
                 return true
             }
         }
         
-        for submodel in submodeles {
-            if submodel.needsLayout() {
+        for subview in subviews {
+            if subview.needsLayout() {
                 return true
             }
         }
@@ -87,8 +89,14 @@ class EmptyFutureView: NSObject {
     }
     
     func applyLayout() {
-        for submodel in submodeles {
-            submodel.applyLayout()
+        for subview in subviews {
+            subview.applyLayout()
+        }
+    }
+    
+    func configureViewsTree() {
+        for subview in subviews {
+            subview.configureViewsTree()
         }
     }
 }
@@ -102,7 +110,7 @@ extension EmptyFutureView: YGLayoutNode {
     }
     
     var subnodes: [YGLayoutNode] {
-        return submodeles
+        return subviews
     }
     
     func safeSetFrame(_ frame: CGRect) {

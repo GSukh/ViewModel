@@ -10,12 +10,12 @@ import UIKit
 
 class TableViewController: UIViewController {
 
-    var viewModel: TableFutureView
+    var tableFutureView: TableFutureView
     
     init() {
-        self.viewModel = TableFutureView(withConfiguration: {_,_  in })
+        self.tableFutureView = TableFutureView(withConfiguration: {_,_  in })
         super.init(nibName: nil, bundle: nil)
-        viewModel.delegate = self
+        tableFutureView.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,23 +24,23 @@ class TableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.bind(toContainer: view, withViewStorage: nil)
+        tableFutureView.bind(toContainer: view, withViewStorage: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.view?.frame = view.bounds
+        tableFutureView.view?.frame = view.bounds
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        viewModel.view?.frame = view.bounds
+        tableFutureView.view?.frame = view.bounds
     }
     
 }
 
-extension TableViewController: TableViewModelDelegate {
-    func tableViewModel(_ tableViewModel: TableFutureView, didSelectCell cell: CellFutureView, atIndexPath indexPath: IndexPath) {
-        // for subclasses
+extension TableViewController: TableFutureViewDelegate {
+    func tableFutureView(_ tableFutureView: TableFutureView, didSelectCell cell: CellFutureView, atIndexPath indexPath: IndexPath) {
+        
     }
 }

@@ -14,6 +14,9 @@
 		E5487F7A23F84B3D0020D3ED /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5487F7923F84B3D0020D3ED /* CellView.swift */; };
 		E5487F7E23F84CB80020D3ED /* ExampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5487F7D23F84CB80020D3ED /* ExampleController.swift */; };
 		E5487F8023F84CD10020D3ED /* SmallCellFutureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5487F7F23F84CD10020D3ED /* SmallCellFutureView.swift */; };
+		E554AF1623FE903C0009CF77 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554AF1523FE903C0009CF77 /* TextView.swift */; };
+		E554AF1823FE90650009CF77 /* TextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554AF1723FE90650009CF77 /* TextRenderer.swift */; };
+		E554AF1A23FE90700009CF77 /* FutureTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E554AF1923FE90700009CF77 /* FutureTextView.swift */; };
 		E58ABE7F23F83E7A0047056A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ABE7E23F83E7A0047056A /* AppDelegate.swift */; };
 		E58ABE8123F83E7A0047056A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ABE8023F83E7A0047056A /* SceneDelegate.swift */; };
 		E58ABE8823F83E7C0047056A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E58ABE8723F83E7C0047056A /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 		E5487F7923F84B3D0020D3ED /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		E5487F7D23F84CB80020D3ED /* ExampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleController.swift; sourceTree = "<group>"; };
 		E5487F7F23F84CD10020D3ED /* SmallCellFutureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCellFutureView.swift; sourceTree = "<group>"; };
+		E554AF1523FE903C0009CF77 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		E554AF1723FE90650009CF77 /* TextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRenderer.swift; sourceTree = "<group>"; };
+		E554AF1923FE90700009CF77 /* FutureTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureTextView.swift; sourceTree = "<group>"; };
 		E58ABE7B23F83E7A0047056A /* FutureView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FutureView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E58ABE7E23F83E7A0047056A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E58ABE8023F83E7A0047056A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,6 +112,16 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		E554AF1423FE90210009CF77 /* Text Future View */ = {
+			isa = PBXGroup;
+			children = (
+				E554AF1523FE903C0009CF77 /* TextView.swift */,
+				E554AF1723FE90650009CF77 /* TextRenderer.swift */,
+				E554AF1923FE90700009CF77 /* FutureTextView.swift */,
+			);
+			path = "Text Future View";
+			sourceTree = "<group>";
+		};
 		E58ABE7223F83E7A0047056A = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +153,7 @@
 		E58ABE9223F840100047056A /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				E554AF1423FE90210009CF77 /* Text Future View */,
 				E58ABE9323F8401C0047056A /* Future View */,
 				E5487F7223F84ACA0020D3ED /* Table View */,
 			);
@@ -277,8 +294,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5487F7A23F84B3D0020D3ED /* CellView.swift in Sources */,
+				E554AF1A23FE90700009CF77 /* FutureTextView.swift in Sources */,
 				E58ABE9B23F840900047056A /* ViewStorage.swift in Sources */,
 				E58ABE9523F840310047056A /* EmptyFutureView.swift in Sources */,
+				E554AF1823FE90650009CF77 /* TextRenderer.swift in Sources */,
+				E554AF1623FE903C0009CF77 /* TextView.swift in Sources */,
 				E58ABE9723F840510047056A /* FutureView.swift in Sources */,
 				E5487F8023F84CD10020D3ED /* SmallCellFutureView.swift in Sources */,
 				E58ABE7F23F83E7A0047056A /* AppDelegate.swift in Sources */,

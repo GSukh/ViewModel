@@ -10,13 +10,13 @@ import UIKit
 
 class CellView: UITableViewCell {
     
-    var viewModel: CellFutureView?
+    var futureView: CellFutureView?
     private(set) var viewStorage: ViewStorage?
 
-    func adopt(viewModel: CellFutureView, withStorage viewStorage: ViewStorage) {
+    func adopt(futureView: CellFutureView, withStorage viewStorage: ViewStorage) {
         self.viewStorage = viewStorage
-        self.viewModel = viewModel
-        viewModel.bind(toContainer: self.contentView, withViewStorage: viewStorage)
+        self.futureView = futureView
+        futureView.bind(toContainer: self.contentView, withViewStorage: viewStorage)
     }
     
 }

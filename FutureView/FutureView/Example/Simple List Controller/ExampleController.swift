@@ -22,7 +22,7 @@ class ExampleController: TableViewController {
         }
         let section = Section()
         section.items = items
-        viewModel.update(sections: [section])
+        tableFutureView.update(sections: [section])
     }
 
 }

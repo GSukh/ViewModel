@@ -15,27 +15,27 @@ class Section {
     var header: CellFutureView?
 }
 
-protocol TableViewModelDelegate: NSObjectProtocol {
-    func tableViewModel(_ tableViewModel: TableFutureView, didSelectCell cell: CellFutureView, atIndexPath indexPath: IndexPath)
+protocol TableFutureViewDelegate: NSObjectProtocol {
+    func tableFutureView(_ tableFutureView: TableFutureView, didSelectCell cell: CellFutureView, atIndexPath indexPath: IndexPath)
     
     // TODO: add sufficient list of methods
 }
 
-private var cellViewModelIdentifier = "CellViewModelReuseIdentifier"
+private var cellFutureViewIdentifier = "CellFutureViewIdentifier"
 
 class TableFutureView: FutureView<UITableView> {
     private(set) var sections: [Section] = []
-    weak var delegate: TableViewModelDelegate?
+    weak var delegate: TableFutureViewDelegate?
     
     private var viewStorage = ViewStorage()
-    private let layoutQueue = DispatchQueue(label: "com.viewModel.tableViewLayoutQueue")
+    private let layoutQueue = DispatchQueue(label: "com.futureView.tableViewLayoutQueue")
     private var containerSize: CGSize = .zero
 
     
     override func createView() -> UITableView {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         
-        tableView.register(CellView.self, forCellReuseIdentifier: cellViewModelIdentifier)
+        tableView.register(CellView.self, forCellReuseIdentifier: cellFutureViewIdentifier)
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -54,18 +54,17 @@ class TableFutureView: FutureView<UITableView> {
         }
     }
     
-    func append(sections: [Section]) {
-//        self.sections = section
-    }
+//    func append(sections: [Section]) {
+//    }
     
     private func calculateLayoutFor(sections: [Section], completion: @escaping () -> ()) {
         let group = DispatchGroup()
         
-        let containerSize = CGSize(width: view?.frame.width ?? 0, height: CGFloat.greatestFiniteMagnitude)
+        let containerSize = CGSize(width: view?.frame.width ?? 0, height: CGFloat.nan)
         for section in sections {
-            for cellViewModel in section.items {
+            for futureView in section.items {
                 layoutQueue.async(group: group, execute: DispatchWorkItem(block: {
-                    cellViewModel.layout(with: containerSize)
+                    futureView.layout(with: containerSize)
                 }))
             }
         }
@@ -86,29 +85,24 @@ class TableFutureView: FutureView<UITableView> {
     }
     
     fileprivate func unbindCellIfNeeded(_ cell: CellView) {
-        if let cellViewModel = cell.viewModel {
-            cellViewModel.unbind(withViewStorage: viewStorage)
-            cell.viewModel = nil
+        if let cellFutureView = cell.futureView {
+            cellFutureView.unbind(withViewStorage: viewStorage)
+            cell.futureView = nil
         }
     }
     
-    fileprivate func reloadCellForViewModel(_ viewModel: CellFutureView) {
-//        for indexPath in tableView.indexPathsForVisibleRows ?? [] {
-//            let cellViewModel = self.sections[indexPath.section].items[indexPath.row]
-//            if cellViewModel.isEqual(viewModel) {
-//                tableView.reloadRows(at: [indexPath], with: .automatic)
-//            }
-//        }
+    fileprivate func reloadCellForFutureView(_ futureView: CellFutureView) {
         UIView.animate(withDuration: 1.0) {
             guard let tableView = self.view else { return }
             tableView.beginUpdates()
             for indexPath in tableView.indexPathsForVisibleRows ?? [] {
-                let cellViewModel = self.sections[indexPath.section].items[indexPath.row]
-                if cellViewModel.isEqual(viewModel) {
-                    if cellViewModel.needsLayout() {
-                        let containerSize = CGSize(width: tableView.frame.width, height: CGFloat.greatestFiniteMagnitude)
-                        cellViewModel.layout(with: containerSize)
-                        cellViewModel.applyLayout()
+                let cellFutureView = self.sections[indexPath.section].items[indexPath.row]
+                if cellFutureView.isEqual(futureView) {
+                    cellFutureView.configureViewsTree()
+                    if cellFutureView.needsLayout() {
+                        let containerSize = CGSize(width: tableView.frame.width, height: CGFloat.nan)
+                        cellFutureView.layout(with: containerSize)
+                        cellFutureView.applyLayout()
                     }
                 }
             }
@@ -129,7 +123,7 @@ extension TableFutureView: UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: cellViewModelIdentifier, for: indexPath)
+        return tableView.dequeueReusableCell(withIdentifier: cellFutureViewIdentifier, for: indexPath)
     }
 
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -140,39 +134,38 @@ extension TableFutureView: UITableViewDataSource {
 extension TableFutureView: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let viewModel = self.sections[indexPath.section].items[indexPath.row]
-        if let cellViewModelView = cell as? CellView {
-            cellViewModelView.adopt(viewModel: viewModel, withStorage: viewStorage)
+        let futureView = self.sections[indexPath.section].items[indexPath.row]
+        if let cellView = cell as? CellView {
+            cellView.adopt(futureView: futureView, withStorage: viewStorage)
         }
-//        viewModel.bind(toContainer: cell, withViewStorage: viewStorage)
-        viewModel.reloadCellHandler = { [weak self] viewModel in
-            self?.reloadCellForViewModel(viewModel)
+        futureView.reloadCellHandler = { [weak self] futureView in
+            self?.reloadCellForFutureView(futureView)
         }
     }
     
     public func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if let cellViewModelView = cell as? CellView {
-            unbindCellIfNeeded(cellViewModelView)
+        if let cellView = cell as? CellView {
+            unbindCellIfNeeded(cellView)
         }
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cellViewModel = self.sections[indexPath.section].items[indexPath.row]
-        if cellViewModel.needsLayout() {
-            let containerSize = CGSize(width: view?.frame.width ?? 0, height: CGFloat.greatestFiniteMagnitude)
-            cellViewModel.layout(with: containerSize)
+        let cellFutureView = self.sections[indexPath.section].items[indexPath.row]
+        if cellFutureView.needsLayout() {
+            let containerSize = CGSize(width: view?.frame.width ?? 0, height: CGFloat.nan)
+            cellFutureView.layout(with: containerSize)
         }
-        return cellViewModel.frame.size.height
+        return cellFutureView.frame.size.height
     }
     
     public func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        let cellViewModel = self.sections[indexPath.section].items[indexPath.row]
-        return cellViewModel.selectable
+        let cellFutureView = self.sections[indexPath.section].items[indexPath.row]
+        return cellFutureView.selectable
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cellViewModel = self.sections[indexPath.section].items[indexPath.row]
-        delegate?.tableViewModel(self, didSelectCell: cellViewModel, atIndexPath: indexPath)
+        let cellFutureView = self.sections[indexPath.section].items[indexPath.row]
+        delegate?.tableFutureView(self, didSelectCell: cellFutureView, atIndexPath: indexPath)
 
         tableView.deselectRow(at: indexPath, animated: true)
     }
