@@ -10,12 +10,11 @@ import UIKit
 
 class ViewConfigurator<ViewType: UIView> {
     
-    // TODO:
-    // separate stack on setup and cleanup stacks
-    // mark which configurations have already performed
-    
     typealias ViewConfiguration = (ViewType, Bool) -> ()
     private var configurationStack: [ViewConfiguration] = []
+    
+    typealias ViewCleanup = (ViewType) -> ()
+    private var cleanupStack: [ViewCleanup] = []
     
     func add(_ configuration: @escaping ViewConfiguration) {
         configurationStack.append(configuration)
@@ -26,10 +25,19 @@ class ViewConfigurator<ViewType: UIView> {
     }
     
     func configure(view: ViewType) {
-        configurationStack.forEach { $0(view, true) }
+        cleanupStack.forEach {
+            $0(view)
+        }
+        cleanupStack.removeAll()
+        configurationStack.forEach { (viewConfiguration) in
+            viewConfiguration(view, true)
+            cleanupStack.append({ viewConfiguration($0, false) })
+        }
     }
     
     func prepareForReuse(view: ViewType) {
-        configurationStack.reversed().forEach { $0(view, false) }
-    }
+        cleanupStack.forEach {
+            $0(view)
+        }
+        cleanupStack.removeAll()    }
 }
