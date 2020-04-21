@@ -37,7 +37,6 @@ class SmallCellFutureView: CellFutureView {
             nameFutureView.attributedText = SmallCellFutureView.attributedTitle(compactMode)
             nameFutureView.configureLayout {
                 $0.marginTop = 10
-                $0.flexShrink = 1
             }
             add(nameFutureView)
 
@@ -49,7 +48,9 @@ class SmallCellFutureView: CellFutureView {
                      $0.removeTarget(self, action: #selector(self.actionHandler), for: .touchUpInside)
                  }
             }) { (add) in
-                buttonTitleFutureView = FutureTextView(withConfiguration: {_,_ in})
+                buttonTitleFutureView = FutureTextView(withConfiguration: {
+                    $0.isUserInteractionEnabled = $1 ? false : true
+                })
                 buttonTitleFutureView.attributedText = SmallCellFutureView.attributedButtonTitle(compactMode)
                 buttonTitleFutureView.configureLayout {
                     $0.margin = 16.0
@@ -66,6 +67,7 @@ class SmallCellFutureView: CellFutureView {
             $0.flexDirection = .column
             $0.marginHorizontal = 10
             $0.marginVertical = 4
+            $0.flexShrink = 1
         }
         add(rightContainer)
 
@@ -106,8 +108,9 @@ class SmallCellFutureView: CellFutureView {
         buttonTitleFutureView.attributedText = SmallCellFutureView.attributedButtonTitle(compactMode)
         buttonTitleFutureView.invalidateLayout()
         
+        let avatarColor = compactMode ? UIColor.green : UIColor.red
         avatarFutureView.viewConfigurator.add {
-            $0.backgroundColor = $1 ? .red : nil
+            $0.backgroundColor = $1 ? avatarColor : nil
         }
         avatarFutureView.configureView()
         
@@ -116,10 +119,4 @@ class SmallCellFutureView: CellFutureView {
         }
     }
     
-    override func safeSetFrame(_ frame: CGRect) {
-        super.safeSetFrame(frame)
-        if frame.height.isNaN {
-            print(frame)
-        }
-    }
 }

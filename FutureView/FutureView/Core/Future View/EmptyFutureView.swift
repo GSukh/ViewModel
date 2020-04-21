@@ -14,7 +14,7 @@ class EmptyFutureView: NSObject {
 
     private(set) var yoga: YGLayout!
     
-    fileprivate(set) var frame: CGRect = .zero
+    var frame: CGRect = .zero
     fileprivate(set) var bounds: CGRect = .zero
     private var layoutIsValid = false
     

@@ -14,4 +14,7 @@ class CellFutureView: EmptyFutureView {
     
     var reloadCellHandler: ((CellFutureView) -> ())?
 
+    override func safeSetFrame(_ frame: CGRect) {
+        super.safeSetFrame(frame)
+    }
 }

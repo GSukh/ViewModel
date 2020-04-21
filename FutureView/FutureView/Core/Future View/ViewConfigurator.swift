@@ -39,5 +39,6 @@ class ViewConfigurator<ViewType: UIView> {
         cleanupStack.forEach {
             $0(view)
         }
-        cleanupStack.removeAll()    }
+        cleanupStack.removeAll()
+    }
 }

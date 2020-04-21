@@ -43,7 +43,7 @@ class TableFutureView: FutureView<UITableView> {
         return tableView
     }
     
-    func update(sections: [Section]) {
+    func reset(with sections: [Section]) {
         calculateLayoutFor(sections: sections) {
             guard let tableView = self.view else { return }
             

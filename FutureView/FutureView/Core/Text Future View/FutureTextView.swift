@@ -15,11 +15,19 @@ class FutureTextView: FutureView<TextView> {
             invalidateLayout()
             if let attributedText = attributedText {
                 textRenderer = TextRenderer(attributedText)
+                textRenderer?.numberOfLines = numberOfLines
             } else {
                 textRenderer = nil
             }
         }
     }
+    var numberOfLines: Int = 1 {
+        didSet {
+            invalidateLayout()
+            textRenderer?.numberOfLines = numberOfLines
+        }
+    }
+
     private var textRenderer: TextRenderer?
     
     
