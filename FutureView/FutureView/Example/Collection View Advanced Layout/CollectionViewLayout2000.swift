@@ -17,10 +17,14 @@ protocol CollectionViewLayout2000DataSource: UICollectionViewDataSource {
 private class CollectionViewSectionAttributes {
     var frame: CGRect
     var items: [UICollectionViewLayoutAttributes]
+    var header: UICollectionViewLayoutAttributes?
+    var footer: UICollectionViewLayoutAttributes?
     
-    init(with frame: CGRect, items: [UICollectionViewLayoutAttributes]) {
+    init(with frame: CGRect, items: [UICollectionViewLayoutAttributes], header: UICollectionViewLayoutAttributes? = nil, footer: UICollectionViewLayoutAttributes? = nil) {
         self.frame = frame
         self.items = items
+        self.header = header
+        self.footer = footer
     }
 }
 
@@ -52,6 +56,14 @@ class CollectionViewLayout2000: UICollectionViewLayout {
             let originX: CGFloat = direction == .horizontal ? totalFrame.maxX : 0.0
             let originY: CGFloat = direction == .vertical ? totalFrame.maxY : 0.0
             
+            var headerAttributes: UICollectionViewLayoutAttributes? = nil
+            if let headerFrame = sectionLayout.header {
+                headerAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(item: 0, section: s))
+                headerAttributes?.frame = headerFrame
+                headerAttributes?.frame.origin.x += originX
+                headerAttributes?.frame.origin.y += originY
+            }
+            
             let items: [UICollectionViewLayoutAttributes] = sectionLayout.itemFrames.enumerated().map { (index, frame) -> UICollectionViewLayoutAttributes in
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: s))
                 attributes.frame = frame
@@ -59,10 +71,18 @@ class CollectionViewLayout2000: UICollectionViewLayout {
                 attributes.frame.origin.y += originY
                 return attributes
             }
+            
+            var footerAttributes: UICollectionViewLayoutAttributes? = nil
+            if let footerFrame = sectionLayout.footer {
+                footerAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, with: IndexPath(item: 1, section: s))
+                footerAttributes?.frame = footerFrame
+                footerAttributes?.frame.origin.x += originX
+                footerAttributes?.frame.origin.y += originY
+            }
 
             let sectionFrame = CGRect(origin: CGPoint(x: originX, y: originY), size: sectionLayout.size)
             totalFrame = totalFrame.union(sectionFrame)
-            sections.append(CollectionViewSectionAttributes(with: sectionFrame, items: items))
+            sections.append(CollectionViewSectionAttributes(with: sectionFrame, items: items, header: headerAttributes, footer: footerAttributes))
         }
         
         layoutSize = totalFrame.size
@@ -131,17 +151,28 @@ class CollectionViewLayout2000: UICollectionViewLayout {
         }
         
         return sectionsInRect.flatMap { (section) -> [UICollectionViewLayoutAttributes] in
-            return section.items.filter { (item) -> Bool in
+            var attributes = section.items.filter { (item) -> Bool in
                 return item.frame.intersects(rect)
             }
+            
+            if let header = section.header, header.frame.intersects(rect) {
+                attributes.append(header)
+            }
+            
+            if let footer = section.footer, footer.frame.intersects(rect) {
+                attributes.append(footer)
+            }
+            
+            return attributes
         }
     }
     
-//    func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-//        return attributesForSupplementary
-//            .filter({ $0.indexPath == indexPath })
-//            .filter({ $0.representedElementKind == elementKind })
-//            .first
-//    }
-
+    override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let section = sections[indexPath.section]
+        if indexPath.row == 0 {
+            return section.header
+        } else {
+            return section.footer
+        }
+    }
 }

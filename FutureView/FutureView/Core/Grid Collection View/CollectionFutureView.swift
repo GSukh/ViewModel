@@ -20,6 +20,7 @@ class CollectionFutureView: FutureView<UICollectionView> {
     private var containerSize: CGSize = .zero
     
     var direction: UICollectionView.ScrollDirection
+    var showScrollIndicator: Bool = false
 
     init(scrollDirection: UICollectionView.ScrollDirection) {
         direction = scrollDirection
@@ -31,7 +32,11 @@ class CollectionFutureView: FutureView<UICollectionView> {
         collectionViewLayout.direction = direction
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "1234567890")
-        collectionView.backgroundColor = .yellow
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCollectionReusableView")
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "FooterCollectionReusableView")
+        collectionView.backgroundColor = .systemGroupedBackground
+        collectionView.showsVerticalScrollIndicator = showScrollIndicator
+        collectionView.showsHorizontalScrollIndicator = showScrollIndicator
         return collectionView
     }
     
@@ -97,16 +102,19 @@ extension CollectionFutureView: CollectionViewLayout2000DataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sections[section].items.count
     }
-
     
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "1234567890", for: indexPath)
-        cell.backgroundColor = .white
-        
-        return cell
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "1234567890", for: indexPath)
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if (kind == UICollectionView.elementKindSectionFooter) {
+            return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "FooterCollectionReusableView", for: indexPath)
+        } else if (kind == UICollectionView.elementKindSectionHeader) {
+            return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderCollectionReusableView", for: indexPath)
+        }
+        fatalError()
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count
@@ -149,9 +157,6 @@ extension CollectionFutureView: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let futureView = self.sections[indexPath.section].items[indexPath.row]
-//        if let cellView = cell as? CellView {
-//            cellView.adopt(futureView: futureView, withStorage: viewStorage)
-//        }
         futureView.bind(toContainer: cell, withViewStorage: viewStorage)
         futureView.reloadCellHandler = { [weak self] futureView in
             self?.reloadCellForFutureView(futureView)
@@ -162,4 +167,35 @@ extension CollectionFutureView: UICollectionViewDelegate {
         let futureView = self.sections[indexPath.section].items[indexPath.row]
         futureView.unbind(withViewStorage: viewStorage)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        let optFutureView = { () -> CellFutureView? in
+            if indexPath.row == 0 {
+                return sections[indexPath.section].header
+            } else {
+                return sections[indexPath.section].footer
+            }
+        }()
+        guard let futureView = optFutureView else {
+            fatalError()
+        }
+        
+        futureView.bind(toContainer: view, withViewStorage: viewStorage)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        let optFutureView = { () -> CellFutureView? in
+            if indexPath.row == 0 {
+                return sections[indexPath.section].header
+            } else {
+                return sections[indexPath.section].footer
+            }
+        }()
+        guard let futureView = optFutureView else {
+            fatalError()
+        }
+        
+        futureView.unbind(withViewStorage: viewStorage)
+    }
+    
 }

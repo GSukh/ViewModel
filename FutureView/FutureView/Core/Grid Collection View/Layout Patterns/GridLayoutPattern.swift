@@ -30,18 +30,20 @@ class GridLayoutPattern: CollectionSectionLayoutPattern {
     
     var growBehavior: GrowBehavior = .automatic
     
-    func layoutForItems(_ items: [CellFutureView], context: CollectionSectionLayoutContext) -> CollectionSectionLayout {
+    func layoutForSection(_ section: Section, context: CollectionSectionLayoutContext) -> CollectionSectionLayout {
         switch context.direction {
         case .vertical:
-            return verticalLayoutForItems(items, context: context)
+            return verticalLayoutForSection(section, context: context)
         case .horizontal:
-            return horizontalLayoutForItems(items, context: context)
+            return horizontalLayoutForSection(section, context: context)
         default:
             fatalError()
         }
     }
     
-    func horizontalLayoutForItems(_ items: [CellFutureView], context: CollectionSectionLayoutContext) -> CollectionSectionLayout {
+    func horizontalLayoutForSection(_ section: Section, context: CollectionSectionLayoutContext) -> CollectionSectionLayout {
+        let items = section.items
+        
         let containerSize = context.containerSize
         let count = items.count
 
@@ -82,18 +84,33 @@ class GridLayoutPattern: CollectionSectionLayoutPattern {
         }
 
         x += sectionPadding.right
-        
+                
         let sectionSize = CGSize(width: x, height: height)
         return CollectionSectionLayout(itemFrames: itemFrames, size: sectionSize)
     }
     
-    func verticalLayoutForItems(_ items: [CellFutureView], context: CollectionSectionLayoutContext) -> CollectionSectionLayout {
+    func verticalLayoutForSection(_ section: Section, context: CollectionSectionLayoutContext) -> CollectionSectionLayout {
+        let items = section.items
         let containerSize = context.containerSize
         let count = items.count
 
         var x = sectionPadding.left
         var y = sectionPadding.top
         let width = containerSize.width - sectionPadding.left - sectionPadding.right
+        
+        
+        // layout header
+        var headerFrame: CGRect? = nil
+        if let headerViewModel = section.header {
+            let headerContainerSize = CGSize(width: width, height: CGFloat.nan)
+            if headerViewModel.needsLayout() {
+                headerViewModel.layout(with: headerContainerSize)
+            }
+            headerFrame = CGRect(x: x, y: y, width: width, height: headerViewModel.frame.height)
+            y += headerViewModel.frame.height
+        }
+        
+        // layout items
         let itemWidth = width / CGFloat(numberOfColumns) - itemMargin.left - itemMargin.right
         let itemContainerSize = CGSize(width: itemWidth, height: CGFloat.nan)
         
@@ -126,11 +143,22 @@ class GridLayoutPattern: CollectionSectionLayoutPattern {
                 y += height + itemMargin.top + itemMargin.bottom
             }
         }
-
-        y += sectionPadding.bottom
         
+        // layout footer
+        var footerFrame: CGRect? = nil
+        if let footerViewModel = section.footer {
+            let footerContainerSize = CGSize(width: width, height: CGFloat.nan)
+            if footerViewModel.needsLayout() {
+                footerViewModel.layout(with: footerContainerSize)
+            }
+            footerFrame = CGRect(x: x, y: y, width: width, height: footerViewModel.frame.height)
+            y += footerViewModel.frame.height
+        }
+        
+        y += sectionPadding.bottom
         let sectionSize = CGSize(width: width, height: y)
-        return CollectionSectionLayout(itemFrames: itemFrames, size: sectionSize)
+        
+        return CollectionSectionLayout(itemFrames: itemFrames, size: sectionSize, header: headerFrame, footer: footerFrame)
     }
     
 }

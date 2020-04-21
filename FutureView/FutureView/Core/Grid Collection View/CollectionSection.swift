@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol CollectionSectionLayoutPattern {
-    func layoutForItems(_ items: [CellFutureView], context: CollectionSectionLayoutContext) -> CollectionSectionLayout
+    func layoutForSection(_ section: Section, context: CollectionSectionLayoutContext) -> CollectionSectionLayout
 }
 
 
@@ -39,20 +39,24 @@ class CollectionSectionLayoutContext {
 
 class CollectionSectionLayout {
     var itemFrames: [CGRect]
+    var header: CGRect?
+    var footer: CGRect?
     var size: CGSize
     
-    init(itemFrames: [CGRect], size: CGSize) {
+    init(itemFrames: [CGRect], size: CGSize, header: CGRect? = nil, footer: CGRect? = nil) {
         self.itemFrames = itemFrames
         self.size = size
+        self.header = header
+        self.footer = footer
     }
 }
 
 
-class CollectionSection {
-    var name: String?
-    var footer: CellFutureView?
-    var items: [CellFutureView] = []
-    var header: CellFutureView?
+class CollectionSection: Section {
+//    var name: String?
+//    var footer: CellFutureView?
+//    var items: [CellFutureView] = []
+//    var header: CellFutureView?
     
     let layoutPattern: CollectionSectionLayoutPattern
     private(set) var lastContext: CollectionSectionLayoutContext?
@@ -72,8 +76,7 @@ class CollectionSection {
             return lastLayout
         }
         
-        
-        let layout = layoutPattern.layoutForItems(items, context: context)
+        let layout = layoutPattern.layoutForSection(self, context: context)
         defer {
             lastContext = context
             lastLayout = layout
