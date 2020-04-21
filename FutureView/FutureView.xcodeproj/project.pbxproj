@@ -27,6 +27,7 @@
 		E58ABE9723F840510047056A /* FutureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ABE9623F840510047056A /* FutureView.swift */; };
 		E58ABE9923F8406C0047056A /* ViewConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ABE9823F8406C0047056A /* ViewConfigurator.swift */; };
 		E58ABE9B23F840900047056A /* ViewStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ABE9A23F840900047056A /* ViewStorage.swift */; };
+		E5B30E8B244F0DFE0094E3EC /* HorizontalCellFutureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B30E8A244F0DFE0094E3EC /* HorizontalCellFutureView.swift */; };
 		E5BBD6E0244B51D4004353E7 /* CollectionFutureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BBD6DF244B51D4004353E7 /* CollectionFutureView.swift */; };
 		E5DD54A2244DDBFD003F19A7 /* CollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DD54A1244DDBFD003F19A7 /* CollectionSection.swift */; };
 		E5DD54A5244DDFF8003F19A7 /* GridLayoutPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DD54A4244DDFF8003F19A7 /* GridLayoutPattern.swift */; };
@@ -62,6 +63,7 @@
 		E58ABE9623F840510047056A /* FutureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureView.swift; sourceTree = "<group>"; };
 		E58ABE9823F8406C0047056A /* ViewConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConfigurator.swift; sourceTree = "<group>"; };
 		E58ABE9A23F840900047056A /* ViewStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStorage.swift; sourceTree = "<group>"; };
+		E5B30E8A244F0DFE0094E3EC /* HorizontalCellFutureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCellFutureView.swift; sourceTree = "<group>"; };
 		E5BBD6DF244B51D4004353E7 /* CollectionFutureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionFutureView.swift; sourceTree = "<group>"; };
 		E5DD54A1244DDBFD003F19A7 /* CollectionSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionSection.swift; sourceTree = "<group>"; };
 		E5DD54A4244DDFF8003F19A7 /* GridLayoutPattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayoutPattern.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		E5487F7C23F84C950020D3ED /* Simple List Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E5B30E89244F0DD60094E3EC /* Horizontal Collection */,
 				E5487F7F23F84CD10020D3ED /* SmallCellFutureView.swift */,
 			);
 			path = "Simple List Controller";
@@ -204,7 +207,7 @@
 				E554AF1423FE90210009CF77 /* Text Future View */,
 				E58ABE9323F8401C0047056A /* Future View */,
 				E5487F7223F84ACA0020D3ED /* Table View */,
-				E5BBD6DE244B51B4004353E7 /* Collection View */,
+				E5BBD6DE244B51B4004353E7 /* Grid Collection View */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -220,14 +223,22 @@
 			path = "Future View";
 			sourceTree = "<group>";
 		};
-		E5BBD6DE244B51B4004353E7 /* Collection View */ = {
+		E5B30E89244F0DD60094E3EC /* Horizontal Collection */ = {
+			isa = PBXGroup;
+			children = (
+				E5B30E8A244F0DFE0094E3EC /* HorizontalCellFutureView.swift */,
+			);
+			path = "Horizontal Collection";
+			sourceTree = "<group>";
+		};
+		E5BBD6DE244B51B4004353E7 /* Grid Collection View */ = {
 			isa = PBXGroup;
 			children = (
 				E5DD54A3244DDFC5003F19A7 /* Layout Patterns */,
 				E5BBD6DF244B51D4004353E7 /* CollectionFutureView.swift */,
 				E5DD54A1244DDBFD003F19A7 /* CollectionSection.swift */,
 			);
-			path = "Collection View";
+			path = "Grid Collection View";
 			sourceTree = "<group>";
 		};
 		E5DD54A3244DDFC5003F19A7 /* Layout Patterns */ = {
@@ -394,6 +405,7 @@
 				E5F1FE4C243C850900EC24BA /* SimpleViewController.swift in Sources */,
 				E5487F8023F84CD10020D3ED /* SmallCellFutureView.swift in Sources */,
 				E58ABE7F23F83E7A0047056A /* AppDelegate.swift in Sources */,
+				E5B30E8B244F0DFE0094E3EC /* HorizontalCellFutureView.swift in Sources */,
 				E5BBD6E0244B51D4004353E7 /* CollectionFutureView.swift in Sources */,
 				E58ABE8123F83E7A0047056A /* SceneDelegate.swift in Sources */,
 				E55BEB0E242A205200E5BD97 /* ViewController.swift in Sources */,

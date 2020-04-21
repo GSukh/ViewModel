@@ -19,9 +19,16 @@ class CollectionFutureView: FutureView<UICollectionView> {
     private let layoutQueue = DispatchQueue(label: "com.futureView.collectionViewLayoutQueue")
     private var containerSize: CGSize = .zero
     
+    var direction: UICollectionView.ScrollDirection
+
+    init(scrollDirection: UICollectionView.ScrollDirection) {
+        direction = scrollDirection
+        super.init(withConfiguration: {_,_  in})
+    }
 
     override func createView() -> UICollectionView {
         let collectionViewLayout = CollectionViewLayout2000()
+        collectionViewLayout.direction = direction
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: collectionViewLayout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "1234567890")
         collectionView.backgroundColor = .yellow
@@ -106,8 +113,14 @@ extension CollectionFutureView: CollectionViewLayout2000DataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, layoutForSection section: Int) -> CollectionSectionLayout {
-        let containerSize = CGSize(width: view?.frame.width ?? 0, height: CGFloat.nan)
-        let context = CollectionSectionLayoutContext(direction: .vertical, containerSize: containerSize)
+        let containerSize = { () -> CGSize in
+            switch direction {
+                case .vertical: return CGSize(width: view?.frame.width ?? 0, height: CGFloat.nan)
+                case .horizontal: return CGSize(width: CGFloat.nan, height: view?.frame.height ?? 0)
+                default: fatalError()
+            }
+        }()
+        let context = CollectionSectionLayoutContext(direction: direction, containerSize: containerSize)
         return sections[section].layout(forContext: context)
     }
 }

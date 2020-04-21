@@ -26,7 +26,7 @@ private class CollectionViewSectionAttributes {
 
 class CollectionViewLayout2000: UICollectionViewLayout {
     
-    var scrollDirection: UICollectionView.ScrollDirection = .vertical
+    var direction: UICollectionView.ScrollDirection = .vertical
     
     weak var dataSource: CollectionViewLayout2000DataSource? = nil
     
@@ -39,11 +39,9 @@ class CollectionViewLayout2000: UICollectionViewLayout {
     
 
     open override func prepare() {
-        
         guard let dataSource = dataSource else { return }
         guard let collectionView = collectionView else { return }
         let numberOfSections = dataSource.numberOfSections?(in: collectionView) ?? 0
-        
     
         sections = []
         
@@ -51,18 +49,18 @@ class CollectionViewLayout2000: UICollectionViewLayout {
         for s in 0..<numberOfSections {
             let sectionLayout = dataSource.collectionView(collectionView, layoutForSection: s)
             
-            let originY: CGFloat = totalFrame.maxY
-            let items: [UICollectionViewLayoutAttributes] = sectionLayout.itemFrames.enumerated().map { (index, originalFrame) -> UICollectionViewLayoutAttributes in
-//                var frame = originalFrame
-//                frame.origin.y += originY
+            let originX: CGFloat = direction == .horizontal ? totalFrame.maxX : 0.0
+            let originY: CGFloat = direction == .vertical ? totalFrame.maxY : 0.0
+            
+            let items: [UICollectionViewLayoutAttributes] = sectionLayout.itemFrames.enumerated().map { (index, frame) -> UICollectionViewLayoutAttributes in
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: s))
-                attributes.frame = originalFrame
+                attributes.frame = frame
+                attributes.frame.origin.x += originX
                 attributes.frame.origin.y += originY
                 return attributes
             }
 
-            let sectionFrame = CGRect(origin: CGPoint(x: 0, y: originY), size: sectionLayout.size)
-//            totalFrame.size.width += sectionLayout.size.height
+            let sectionFrame = CGRect(origin: CGPoint(x: originX, y: originY), size: sectionLayout.size)
             totalFrame = totalFrame.union(sectionFrame)
             sections.append(CollectionViewSectionAttributes(with: sectionFrame, items: items))
         }

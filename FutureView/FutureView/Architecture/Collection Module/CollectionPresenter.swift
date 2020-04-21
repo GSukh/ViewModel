@@ -18,9 +18,7 @@ class CollectionPresenter: Presenter {
     var collectionViewModel: CollectionFutureView
 
     override init() {
-        collectionViewModel = CollectionFutureView(withConfiguration: {collectionView,_  in
-            collectionView.backgroundColor = .red
-        })
+        collectionViewModel = CollectionFutureView(scrollDirection: .vertical)
         super.init()
     }
     

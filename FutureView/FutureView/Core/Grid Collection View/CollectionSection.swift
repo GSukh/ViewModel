@@ -54,10 +54,14 @@ class CollectionSection {
     var items: [CellFutureView] = []
     var header: CellFutureView?
     
-    var layoutPattern: CollectionSectionLayoutPattern!
+    let layoutPattern: CollectionSectionLayoutPattern
     private(set) var lastContext: CollectionSectionLayoutContext?
     private(set) var lastLayout: CollectionSectionLayout?
 
+    
+    init(pattern layoutPattern: CollectionSectionLayoutPattern = GridLayoutPattern.plain()) {
+        self.layoutPattern = layoutPattern
+    }
     
     func prepareLayout(forContext context: CollectionSectionLayoutContext) {
         _ = layout(forContext: context)
@@ -67,6 +71,7 @@ class CollectionSection {
         if let lastLayout = lastLayout, let lastContext = lastContext, lastContext ~= context {
             return lastLayout
         }
+        
         
         let layout = layoutPattern.layoutForItems(items, context: context)
         defer {

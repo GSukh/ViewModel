@@ -7,26 +7,61 @@
 //
 
 import UIKit
+import YogaKit
 
 class SimplePresenter: CollectionPresenter {
     
     override func activate(with outputDelegate: PresenterOutput) {
         super.activate(with: outputDelegate)
         
+        let section0 = { () -> CollectionSection in
+            var items: [CellFutureView] = []
+            for _ in 0...10 {
+                let cell = CellFutureView()
+                cell.configureLayout { (layout) in
+                    layout.height = 50
+                    layout.width = 50
+                }
+                
+                let circle = FutureView<UIView> { (view, reuse) in
+                    view.backgroundColor = UIColor.red
+                    view.layer.cornerRadius = 25.0
+                }
+                circle.configureLayout { (layout) in
+                    layout.height = 100%
+                    layout.width = 100%
+                }
+                cell.add(circle)
+                
+                items.append(cell)
+            }
+            let horizontalSection = CollectionSection()
+            horizontalSection.items = items
+            
+            let horizontalCellViewModel = HorizontalCellFutureView([horizontalSection], height: 60.0)
+            
+            
+            let section = CollectionSection()
+            section.items = [horizontalCellViewModel]
+            
+            return section
+        }()
+        
+        
         let section1 = { () -> CollectionSection in
             var items: [CellFutureView] = []
             for _ in 0...4 {
                 items.append(SmallCellFutureView())
             }
-            let section = CollectionSection()
-            section.items = items
             
             let layoutPattern = GridLayoutPattern()
             layoutPattern.numberOfColumns = 2
-    //        layoutPattern.itemHeight = 80
-            layoutPattern.itemMargin = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
-            layoutPattern.sectionPadding = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            section.layoutPattern = layoutPattern
+            layoutPattern.itemMargin = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
+            layoutPattern.sectionPadding = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 12)
+            
+            let section = CollectionSection(pattern: layoutPattern)
+            section.items = items
+
             return section
         }()
         
@@ -37,18 +72,11 @@ class SimplePresenter: CollectionPresenter {
             }
             let section = CollectionSection()
             section.items = items
-            
-            let layoutPattern = GridLayoutPattern()
-            layoutPattern.numberOfColumns = 1
-    //        layoutPattern.itemHeight = 80
-            layoutPattern.itemMargin = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
-            layoutPattern.sectionPadding = UIEdgeInsets(top: 12, left: 12, bottom: 0, right: 12)
-            section.layoutPattern = layoutPattern
             return section
         }()
         
         
-        collectionViewModel.reset(with: [section1, section2])
+        collectionViewModel.reset(with: [section0, section1, section2])
     }
 
 }
