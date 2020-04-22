@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8FFBFC1DF64B11A3ED185FAC /* Pods_FutureView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C44AF4C21A98F6A19046DBDD /* Pods_FutureView.framework */; };
+		6AECD6109681EC5D602B0A36 /* Pods_ViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1D1AA9607DA1C851E4F8A0 /* Pods_ViewModel.framework */; };
 		E531BB25245071F9005762C9 /* ViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E531BB24245071F9005762C9 /* ViewConfiguration.swift */; };
 		E531BB262450743C005762C9 /* ButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E531BB2224506AEF005762C9 /* ButtonViewModel.swift */; };
 		E531BB2A24509652005762C9 /* HighlightableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E531BB2924509652005762C9 /* HighlightableButton.swift */; };
@@ -46,6 +46,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09C77CBEA998F95E9C6D477F /* Pods-ViewModel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViewModel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViewModel/Pods-ViewModel.debug.xcconfig"; sourceTree = "<group>"; };
+		2D164D57D63B6FB0515962A1 /* Pods-ViewModel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViewModel.release.xcconfig"; path = "Pods/Target Support Files/Pods-ViewModel/Pods-ViewModel.release.xcconfig"; sourceTree = "<group>"; };
+		5B1D1AA9607DA1C851E4F8A0 /* Pods_ViewModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ViewModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		98DED41577151F26CB2246E6 /* Pods-FutureView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FutureView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FutureView/Pods-FutureView.debug.xcconfig"; sourceTree = "<group>"; };
 		A4E0C196A7CF059769FBB1BD /* Pods-FutureView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FutureView.release.xcconfig"; path = "Pods/Target Support Files/Pods-FutureView/Pods-FutureView.release.xcconfig"; sourceTree = "<group>"; };
 		C44AF4C21A98F6A19046DBDD /* Pods_FutureView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FutureView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,7 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8FFBFC1DF64B11A3ED185FAC /* Pods_FutureView.framework in Frameworks */,
+				6AECD6109681EC5D602B0A36 /* Pods_ViewModel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				C44AF4C21A98F6A19046DBDD /* Pods_FutureView.framework */,
+				5B1D1AA9607DA1C851E4F8A0 /* Pods_ViewModel.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -227,7 +231,7 @@
 		E58ABE7223F83E7A0047056A = {
 			isa = PBXGroup;
 			children = (
-				E58ABE7D23F83E7A0047056A /* FutureView */,
+				E58ABE7D23F83E7A0047056A /* ViewModel */,
 				E58ABE7C23F83E7A0047056A /* Products */,
 				F6AA3803329459EAD29B4434 /* Pods */,
 				2A18C56CF9FAAA14A03EECF5 /* Frameworks */,
@@ -242,7 +246,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E58ABE7D23F83E7A0047056A /* FutureView */ = {
+		E58ABE7D23F83E7A0047056A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				E55BEB07242A1FC800E5BD97 /* Architecture */,
@@ -250,7 +254,7 @@
 				E5487F7B23F84C5E0020D3ED /* Example */,
 				E5487F8123F84F880020D3ED /* Resources */,
 			);
-			path = FutureView;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		E58ABE9223F840100047056A /* Core */ = {
@@ -350,6 +354,8 @@
 			children = (
 				98DED41577151F26CB2246E6 /* Pods-FutureView.debug.xcconfig */,
 				A4E0C196A7CF059769FBB1BD /* Pods-FutureView.release.xcconfig */,
+				09C77CBEA998F95E9C6D477F /* Pods-ViewModel.debug.xcconfig */,
+				2D164D57D63B6FB0515962A1 /* Pods-ViewModel.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -428,7 +434,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-FutureView/Pods-FutureView-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ViewModel/Pods-ViewModel-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Yoga/yoga.framework",
 				"${BUILT_PRODUCTS_DIR}/YogaKit/YogaKit.framework",
 			);
@@ -439,7 +445,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FutureView/Pods-FutureView-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ViewModel/Pods-ViewModel-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BE4F2213BCFD2FD48B2D8647 /* [CP] Check Pods Manifest.lock */ = {
@@ -453,7 +459,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-FutureView-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ViewModel-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -633,17 +639,17 @@
 		};
 		E58ABE9023F83E7C0047056A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 98DED41577151F26CB2246E6 /* Pods-FutureView.debug.xcconfig */;
+			baseConfigurationReference = 09C77CBEA998F95E9C6D477F /* Pods-ViewModel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DM922GC3W8;
-				INFOPLIST_FILE = FutureView/Resources/Info.plist;
+				INFOPLIST_FILE = ViewModel/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.self.FutureView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.self.ViewModel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -652,17 +658,17 @@
 		};
 		E58ABE9123F83E7C0047056A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A4E0C196A7CF059769FBB1BD /* Pods-FutureView.release.xcconfig */;
+			baseConfigurationReference = 2D164D57D63B6FB0515962A1 /* Pods-ViewModel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DM922GC3W8;
-				INFOPLIST_FILE = FutureView/Resources/Info.plist;
+				INFOPLIST_FILE = ViewModel/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.self.FutureView;
+				PRODUCT_BUNDLE_IDENTIFIER = com.self.ViewModel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
