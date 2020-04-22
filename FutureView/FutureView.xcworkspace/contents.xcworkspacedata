@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:FutureView.xcodeproj">
+      location = "group:/Users/g.sukhorukov/Work/FutureView/FutureView/ViewModel.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">

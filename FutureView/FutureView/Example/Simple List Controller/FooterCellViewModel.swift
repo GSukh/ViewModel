@@ -1,6 +1,6 @@
 //
 //  FooterCellViewModel.swift
-//  FutureView
+//  ViewModel
 //
 //  Created by Григорий Сухоруков on 21/04/2020.
 //  Copyright © 2020 Григорий Сухоруков. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FooterCellViewModel: CellFutureView {
+class FooterCellViewModel: CellViewModel {
     
     override init() {
         super.init()
@@ -17,9 +17,8 @@ class FooterCellViewModel: CellFutureView {
             layout.height = 20.0
         }
         
-        let separatorViewModel = FutureView<UIView> { (view, initial) in
-            view.backgroundColor = .gray
-        }
+        let separatorViewModel = SimpleViewModel()
+        separatorViewModel.configuration.backgroundColor = .gray
         separatorViewModel.configureLayout { (layout) in
             layout.position = .absolute
             layout.bottom = 0.0

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_FutureViewVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_FutureViewVersionString[];
+FOUNDATION_EXPORT double Pods_ViewModelVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_ViewModelVersionString[];
 

@@ -1,6 +1,6 @@
 //
 //  HeaderCellViewModel.swift
-//  FutureView
+//  ViewModel
 //
 //  Created by Григорий Сухоруков on 21/04/2020.
 //  Copyright © 2020 Григорий Сухоруков. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeaderCellViewModel: CellFutureView {
+class HeaderCellViewModel: CellViewModel {
     
     init(title: String, buttonText: String) {
         super.init()
@@ -22,16 +22,13 @@ class HeaderCellViewModel: CellFutureView {
         }
         
         let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 16.0, weight: .medium)]
-        let titleViewModel = FutureTextView(withConfiguration: {_,_ in})
+        let titleViewModel = TextViewModel()
         titleViewModel.attributedText = NSAttributedString(string: title, attributes: attributes)
         add(titleViewModel)
         
         
-        let buttonViewModel = FutureButton { (button, initial) in
-            button.setTitle(buttonText, for: .normal)
-            button.setTitleColor(.blue, for: .normal)
-            button.setTitleColor(.cyan, for: .highlighted)
-        }
+        let buttonViewModel = ButtonViewModel()
+        buttonViewModel.configuration.title = "Показать все"
         buttonViewModel.configureLayout { (layout) in
             layout.height = 20.0
             layout.width = 150.0

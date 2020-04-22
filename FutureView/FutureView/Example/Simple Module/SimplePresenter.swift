@@ -1,6 +1,6 @@
 //
 //  SimplePresenter.swift
-//  FutureView
+//  ViewModel
 //
 //  Created by Григорий Сухоруков on 07/04/2020.
 //  Copyright © 2020 Григорий Сухоруков. All rights reserved.
@@ -16,7 +16,7 @@ class SimplePresenter: CollectionPresenter {
         
         let bannersSection = { () -> CollectionSection in
             let colors: [UIColor] = [.red, .purple, .orange, .green]
-            var items: [CellFutureView] = []
+            var items: [CellViewModel] = []
             for i in 0...3 {
                 let cell = BannerHorizontalCellViewModel(color: colors[i])
                 items.append(cell)
@@ -31,7 +31,7 @@ class SimplePresenter: CollectionPresenter {
             
             
             let height = BannerHorizontalCellViewModel.size.height + 12.0
-            let horizontalCellViewModel = HorizontalCellFutureView([horizontalSection], height: height)
+            let horizontalCellViewModel = HorizontalCellViewModel([horizontalSection], height: height)
             
             let section = CollectionSection()
             section.items = [horizontalCellViewModel]
@@ -43,7 +43,7 @@ class SimplePresenter: CollectionPresenter {
         let familySection = { () -> CollectionSection in
             let titles = ["Григорий Сухоруков", "Михаил Сухоруков", "Алексей Сухоруков", "Людмила Сухорукова"]
             let colors: [UIColor] = [.orange, .green, .blue, .purple]
-            var items: [CellFutureView] = []
+            var items: [CellViewModel] = []
             for i in 0...3 {
                 let cell = FriendHorizontalCellViewModel(title: titles[i], color: colors[i])
                 items.append(cell)
@@ -58,7 +58,7 @@ class SimplePresenter: CollectionPresenter {
             
             
             let height = FriendHorizontalCellViewModel.size.height + 12.0
-            let horizontalCellViewModel = HorizontalCellFutureView([horizontalSection], height: height)
+            let horizontalCellViewModel = HorizontalCellViewModel([horizontalSection], height: height)
             
             let section = CollectionSection()
             section.items = [horizontalCellViewModel]
@@ -72,9 +72,9 @@ class SimplePresenter: CollectionPresenter {
         let menuSection = { () -> CollectionSection in
             let titles = ["Товары", "Магазины", "Скидки", "Подписки", "Акции", "Платежи", "Музыка"]
             let colors: [UIColor] = [.orange, .green, .blue, .purple, .orange, .green, .blue]
-            var items: [CellFutureView] = []
+            var items: [CellViewModel] = []
             for i in 0...6 {
-                items.append(MenuItemCellFutureView(title: titles[i], color: colors[i]))
+                items.append(MenuItemCellViewModel(title: titles[i], color: colors[i]))
             }
             
             let layoutPattern = GridLayoutPattern()
@@ -89,9 +89,9 @@ class SimplePresenter: CollectionPresenter {
         }()
         
 //        let section2 = { () -> CollectionSection in
-//            var items: [CellFutureView] = []
+//            var items: [CellViewModel] = []
 //            for _ in 0...4 {
-//                items.append(SmallCellFutureView())
+//                items.append(SmallCellViewModel())
 //            }
 //            let section = CollectionSection()
 //            section.items = items

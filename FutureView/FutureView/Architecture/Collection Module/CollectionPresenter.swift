@@ -1,6 +1,6 @@
 //
 //  CollectionPresenter.swift
-//  FutureView
+//  ViewModel
 //
 //  Created by Григорий Сухоруков on 09/04/2020.
 //  Copyright © 2020 Григорий Сухоруков. All rights reserved.
@@ -15,10 +15,10 @@ class CollectionViewContext {
 
 class CollectionPresenter: Presenter {
     
-    var collectionViewModel: CollectionFutureView
+    var collectionViewModel: CollectionViewModel
 
     override init() {
-        collectionViewModel = CollectionFutureView(scrollDirection: .vertical)
+        collectionViewModel = CollectionViewModel(scrollDirection: .vertical)
         super.init()
     }
     
@@ -31,8 +31,8 @@ class CollectionPresenter: Presenter {
     
 }
 
-//extension CollectionPresenter: FutureViewDelegate {
-//    func tableFutureView(_ tableFutureView: TableFutureView, didSelectCell cell: CellFutureView, atIndexPath indexPath: IndexPath) {
+//extension CollectionPresenter: ViewModelDelegate {
+//    func tableViewModel(_ tableViewModel: TableViewModel, didSelectCell cell: CellViewModel, atIndexPath indexPath: IndexPath) {
 //        print("item selected")
 //    }
 //}

@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  FutureView
+//  ViewModel
 //
 //  Created by Григорий Сухоруков on 24/03/2020.
 //  Copyright © 2020 Григорий Сухоруков. All rights reserved.

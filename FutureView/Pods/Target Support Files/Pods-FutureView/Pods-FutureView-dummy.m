@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-@interface PodsDummy_Pods_FutureView : NSObject
+@interface PodsDummy_Pods_ViewModel : NSObject
 @end
-@implementation PodsDummy_Pods_FutureView
+@implementation PodsDummy_Pods_ViewModel
 @end

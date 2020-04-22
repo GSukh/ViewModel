@@ -1,6 +1,6 @@
 //
 //  Presenter.swift
-//  FutureView
+//  ViewModel
 //
 //  Created by Григорий Сухоруков on 24/03/2020.
 //  Copyright © 2020 Григорий Сухоруков. All rights reserved.
@@ -30,7 +30,7 @@ import UIKit
 
 
 // temp
-typealias ViewModel = EmptyFutureView
+//typealias ViewModel = EmptyViewModel
 
 protocol PresenterOutput: AnyObject {
 //    // Когда нужно полностью снести старую модель
