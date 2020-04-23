@@ -22,12 +22,12 @@ class CollectionPresenter: Presenter {
         super.init()
     }
     
-    override func activate(with outputDelegate: PresenterOutput) {
-        super.activate(with: outputDelegate)
-        
-        
-//        collectionViewModel.delegate = self
-    }
+//    override func activate(with outputDelegate: PresenterOutput) {
+//        super.activate(with: outputDelegate)
+//        
+//        
+////        collectionViewModel.delegate = self
+//    }
     
 }
 

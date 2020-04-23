@@ -15,10 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
         if let windowScene = scene as? UIWindowScene {
-//            let tableVC = ExampleController()
-            let presenter = SimplePresenter()
-            let vc = SimpleViewController(with: presenter)
-//            let vc = TestCollectionViewController()
+            let vc = SimpleScreens.main.viewController()
             let rootNC = UINavigationController(rootViewController: vc)
 
             let window = UIWindow(windowScene: windowScene)

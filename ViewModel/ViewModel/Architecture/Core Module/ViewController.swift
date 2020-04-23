@@ -72,7 +72,31 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: PresenterOutput {
+extension ViewController: NavigationPerformer {
+    
+    func supportPresentationStyle(_ presentationStyle: PresentationStyle) -> Bool {
+        switch presentationStyle {
+            case .push: return navigationController != nil
+            case .modal: return true
+        }
+    }
+    
+    func push(_ viewController: UIViewController, animated: Bool) {
+        navigationController!.pushViewController(viewController, animated: animated)
+    }
+    
+    func present(_ viewController: UIViewController, animated: Bool) {
+        present(viewController, animated: animated, completion: nil)
+    }
+
+    func dismiss() {
+        if navigationController != nil {
+            navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
 //    // Когда нужно полностью снести старую модель
 //    func presenter(_ presenter: Presenter, didChangedViewModel viewModel: ViewModel) {
 //        if let lastViewModel = lastViewModel {

@@ -72,7 +72,7 @@ class FriendHorizontalCellViewModel: CellViewModel {
     }
     
     @objc func handlePressed() {
-        print("pressed \(title)")
+        router?.route(SimpleScreens.friend(title))
     }
     
 }

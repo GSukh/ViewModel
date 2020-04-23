@@ -11,6 +11,7 @@ import UIKit
 class CellViewModel: EmptyViewModel {
     
     var selectable: Bool = false
+    weak var router: Router?
     
     var reloadCellHandler: ((CellViewModel) -> ())?
 

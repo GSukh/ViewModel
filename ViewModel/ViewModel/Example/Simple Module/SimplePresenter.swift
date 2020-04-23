@@ -11,8 +11,8 @@ import YogaKit
 
 class SimplePresenter: CollectionPresenter {
     
-    override func activate(with outputDelegate: PresenterOutput) {
-        super.activate(with: outputDelegate)
+    override func activate(with navigationPerformer: NavigationPerformer) {
+        super.activate(with: navigationPerformer)
         
         let bannersSection = { () -> CollectionSection in
             let colors: [UIColor] = [.red, .purple, .orange, .green]
@@ -46,6 +46,7 @@ class SimplePresenter: CollectionPresenter {
             var items: [CellViewModel] = []
             for i in 0...3 {
                 let cell = FriendHorizontalCellViewModel(title: titles[i], color: colors[i])
+                cell.router = self
                 items.append(cell)
             }
             
@@ -87,17 +88,6 @@ class SimplePresenter: CollectionPresenter {
 
             return section
         }()
-        
-//        let section2 = { () -> CollectionSection in
-//            var items: [CellViewModel] = []
-//            for _ in 0...4 {
-//                items.append(SmallCellViewModel())
-//            }
-//            let section = CollectionSection()
-//            section.items = items
-//            return section
-//        }()
-        
         
         collectionViewModel.reset(with: [bannersSection, familySection, menuSection])
     }

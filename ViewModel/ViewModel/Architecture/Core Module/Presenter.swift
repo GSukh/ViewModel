@@ -28,11 +28,17 @@ import UIKit
  
  */
 
+protocol NavigationPerformer: NSObjectProtocol {
+    func supportPresentationStyle(_ presentationStyle: PresentationStyle) -> Bool
+    
+    func push(_ viewController: UIViewController, animated: Bool)
+    func present(_ viewController: UIViewController, animated: Bool)
 
-// temp
-//typealias ViewModel = EmptyViewModel
+    func dismiss()
+}
 
-protocol PresenterOutput: AnyObject {
+
+protocol PresenterOutput: NSObjectProtocol {
 //    // Когда нужно полностью снести старую модель
 //    func presenter(_ presenter: Presenter, didChangedViewModel viewModel: ViewModel)
 //
@@ -43,10 +49,11 @@ protocol PresenterOutput: AnyObject {
 class Presenter: NSObject {
     
     //    private(set) var lastViewContext: ViewContext?
+    private(set) weak var navigationPerformer: NavigationPerformer!
     private(set) weak var outputDelegate: PresenterOutput!
     
-    func activate(with outputDelegate: PresenterOutput) {
-        self.outputDelegate = outputDelegate
+    func activate(with navigationPerformer: NavigationPerformer) {
+        self.navigationPerformer = navigationPerformer
         
         // activate model to load smth
     }
@@ -76,5 +83,31 @@ class Presenter: NSObject {
 ////        outputDelegate.presenter(self, didChangedViewModel: viewModel)
 //    }
     
+}
+
+extension Presenter: Router {
+    func route(_ routable: Routable) -> Bool {
+        let prefferedPresentationStyle = routable.prefferedPresentationStyle()
+        return route(routable, presentationStyle: prefferedPresentationStyle)
+    }
+    
+    func route(_ routable: Routable, presentationStyle: PresentationStyle) -> Bool {
+        guard navigationPerformer.supportPresentationStyle(presentationStyle) else {
+            print("Unsupported navigation style")
+            return false
+        }
+        let viewController = spawnViewController(forRoutable: routable)
+
+        switch presentationStyle {
+        case .push(let animated): navigationPerformer.push(viewController, animated: animated)
+        case .modal(let animated): navigationPerformer.present(viewController, animated: animated)
+        }
+        
+        return true
+    }
+    
+    func spawnViewController(forRoutable routable: Routable) -> UIViewController {
+        return routable.viewController()
+    }
 }
 

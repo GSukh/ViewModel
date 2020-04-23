@@ -26,7 +26,6 @@ class HorizontalCellViewModel: CellViewModel {
             $0.height = YGValue(height)
         })
         
-        
     }
     
 }
