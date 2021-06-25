@@ -72,8 +72,8 @@ class TableViewModel: ViewModel<UITableView, ViewConfiguration<UITableView>> {
         group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: completion))
     }
     
-    override func bind(toContainer container: UIView, withViewStorage viewStorage: ViewStorage?) {
-        super.bind(toContainer: container, withViewStorage: viewStorage)
+    override func bind(toContainer container: UIView, origin: CGPoint, viewStorage: ViewStorage?) {
+        super.bind(toContainer: container, origin: origin, viewStorage: viewStorage)
         containerSize = view?.frame.size ?? .zero
     }
     
@@ -85,9 +85,9 @@ class TableViewModel: ViewModel<UITableView, ViewConfiguration<UITableView>> {
     }
     
     fileprivate func unbindCellIfNeeded(_ cell: CellView) {
-        if let cellViewModel = cell.ViewModel {
+        if let cellViewModel = cell.viewModel {
             cellViewModel.unbind(withViewStorage: viewStorage)
-            cell.ViewModel = nil
+            cell.viewModel = nil
         }
     }
     
@@ -134,11 +134,11 @@ extension TableViewModel: UITableViewDataSource {
 extension TableViewModel: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let ViewModel = self.sections[indexPath.section].items[indexPath.row]
+        let viewModel = self.sections[indexPath.section].items[indexPath.row]
         if let cellView = cell as? CellView {
-            cellView.adopt(ViewModel: ViewModel, withStorage: viewStorage)
+            cellView.adopt(viewModel: viewModel, withStorage: viewStorage)
         }
-        ViewModel.reloadCellHandler = { [weak self] ViewModel in
+        viewModel.reloadCellHandler = { [weak self] ViewModel in
             self?.reloadCellForViewModel(ViewModel)
         }
     }

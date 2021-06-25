@@ -33,7 +33,7 @@ class CollectionViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionPresenter.collectionViewModel.bind(toContainer: view, withViewStorage: nil)
+        collectionPresenter.collectionViewModel.bind(toContainer: view, origin: .zero, viewStorage: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

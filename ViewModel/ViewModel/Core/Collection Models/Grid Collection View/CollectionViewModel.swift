@@ -8,9 +8,6 @@
 
 import UIKit
 
-
-
-
 class CollectionViewModel: ViewModel<UICollectionView, ViewConfiguration<UICollectionView>> {
     
     private var sections: [CollectionSection] = []
@@ -75,9 +72,8 @@ class CollectionViewModel: ViewModel<UICollectionView, ViewConfiguration<UIColle
         group.notify(queue: DispatchQueue.main, work: DispatchWorkItem(block: completion))
     }
     
-    
-    override func bind(toContainer container: UIView, withViewStorage viewStorage: ViewStorage?) {
-        super.bind(toContainer: container, withViewStorage: viewStorage)
+    override func bind(toContainer container: UIView, origin: CGPoint, viewStorage: ViewStorage?) {
+        super.bind(toContainer: container, origin: origin, viewStorage: viewStorage)
         containerSize = view?.frame.size ?? .zero
         
         self.view?.delegate = self
@@ -156,10 +152,10 @@ extension CollectionViewModel: UICollectionViewDelegate {
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let ViewModel = self.sections[indexPath.section].items[indexPath.row]
-        ViewModel.bind(toContainer: cell, withViewStorage: viewStorage)
-        ViewModel.reloadCellHandler = { [weak self] ViewModel in
-            self?.reloadCellForViewModel(ViewModel)
+        let viewModel = self.sections[indexPath.section].items[indexPath.row]
+        viewModel.bind(toContainer: cell, origin: .zero, viewStorage: viewStorage)
+        viewModel.reloadCellHandler = { [weak self] viewModel in
+            self?.reloadCellForViewModel(viewModel)
         }
     }
     
@@ -176,11 +172,11 @@ extension CollectionViewModel: UICollectionViewDelegate {
                 return sections[indexPath.section].footer
             }
         }()
-        guard let ViewModel = optViewModel else {
+        guard let viewModel = optViewModel else {
             fatalError()
         }
         
-        ViewModel.bind(toContainer: view, withViewStorage: viewStorage)
+        viewModel.bind(toContainer: view, origin: .zero, viewStorage: viewStorage)
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {

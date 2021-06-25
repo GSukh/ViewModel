@@ -7,7 +7,7 @@ DEPENDENCIES:
   - YogaKit (from `https://github.com/GSukh/yoga.git`, commit `9918b4fd76ed53f20e1254373ada1fb64b209bbf`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Yoga
 
 EXTERNAL SOURCES:
@@ -26,4 +26,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 02ffa9a24e299beafe8e02fe37184fa1fcca64d8
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.10.1

@@ -10,13 +10,13 @@ import UIKit
 
 class CellView: UITableViewCell {
     
-    var ViewModel: CellViewModel?
+    var viewModel: CellViewModel?
     private(set) var viewStorage: ViewStorage?
 
-    func adopt(ViewModel: CellViewModel, withStorage viewStorage: ViewStorage) {
+    func adopt(viewModel: CellViewModel, withStorage viewStorage: ViewStorage) {
         self.viewStorage = viewStorage
-        self.ViewModel = ViewModel
-        ViewModel.bind(toContainer: self.contentView, withViewStorage: viewStorage)
+        self.viewModel = viewModel
+        viewModel.bind(toContainer: contentView, origin: .zero, viewStorage: viewStorage)
     }
     
 }

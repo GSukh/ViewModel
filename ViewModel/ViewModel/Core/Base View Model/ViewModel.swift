@@ -33,7 +33,7 @@ class ViewModel<ViewType: UIView, ConfigurationType: ViewConfiguration<ViewType>
     }
     
     // superclass methods
-    override func bind(toContainer container: UIView, withViewStorage viewStorage: ViewStorage?) {
+    override func bind(toContainer container: UIView, origin: CGPoint, viewStorage: ViewStorage?) {
         let iden = viewIdentifier()
         var viewCandidate: ViewType? = viewStorage?.dequeue(viewWithIdentifier: iden) as? ViewType
         if viewCandidate == nil {
@@ -42,13 +42,12 @@ class ViewModel<ViewType: UIView, ConfigurationType: ViewConfiguration<ViewType>
         
         if let view = viewCandidate {
             container.addSubview(view)
-            view.frame = frame
+            view.frame = frame.addingOrigin(origin)
             configure(view: view)
             self.view = view
-
-            super.bind(toContainer: view, withViewStorage: viewStorage)
+            super.bind(toContainer: container, origin: .zero, viewStorage: viewStorage)
         } else {
-            super.bind(toContainer: container, withViewStorage: viewStorage)
+            super.bind(toContainer: container, origin: origin, viewStorage: viewStorage)
         }
     }
     
@@ -93,5 +92,13 @@ class ViewModel<ViewType: UIView, ConfigurationType: ViewConfiguration<ViewType>
     // PRIVATE FUNCS
     private func viewIdentifier() -> String {
         return String(describing: ViewType.self)
+    }
+}
+
+extension CGRect {
+    func addingOrigin(_ origin: CGPoint) -> CGRect {
+        let x = self.origin.x + origin.x
+        let y = self.origin.y + origin.y
+        return CGRect(x: x, y: y, width: width, height: height)
     }
 }

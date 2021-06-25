@@ -37,9 +37,9 @@ class EmptyViewModel: NSObject {
     }
     
     
-    func bind(toContainer container: UIView, withViewStorage viewStorage: ViewStorage?) {
+    func bind(toContainer container: UIView, origin: CGPoint, viewStorage: ViewStorage?) {
         for subview in subviews {
-            subview.bind(toContainer: container, withViewStorage: viewStorage)
+            subview.bind(toContainer: container, origin: frame.origin, viewStorage: viewStorage)
         }
     }
     
