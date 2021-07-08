@@ -20,7 +20,6 @@ class EmptyViewModel: NSObject {
     
     private(set) var subviews: [EmptyViewModel] = []
     
-    
     override init() {
         super.init()
         yoga = YGLayout(layoutNode: self)
@@ -31,6 +30,11 @@ class EmptyViewModel: NSObject {
         subviews.append(subview)
     }
     
+    func add(_ generator: () -> EmptyViewModel) {
+        let subview = generator()
+        add(subview)
+    }
+    
     func configureLayout(withBlock block: (YGLayout) -> ()) {
         block(yoga)
         invalidateLayout()
@@ -39,7 +43,7 @@ class EmptyViewModel: NSObject {
     
     func bind(toContainer container: UIView, origin: CGPoint, viewStorage: ViewStorage?) {
         for subview in subviews {
-            subview.bind(toContainer: container, origin: frame.origin, viewStorage: viewStorage)
+            subview.bind(toContainer: container, origin: origin, viewStorage: viewStorage)
         }
     }
     

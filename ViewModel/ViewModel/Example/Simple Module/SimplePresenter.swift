@@ -14,6 +14,14 @@ class SimplePresenter: CollectionPresenter {
     override func activate(with navigationPerformer: NavigationPerformer) {
         super.activate(with: navigationPerformer)
         
+        let testSection = { () -> CollectionSection in
+            let section = CollectionSection()
+            section.items = [HListCellViewModel()]
+            section.footer = FooterCellViewModel()
+            
+            return section
+        }()
+        
         let bannersSection = { () -> CollectionSection in
             let colors: [UIColor] = [.red, .purple, .orange, .green]
             var items: [CellViewModel] = []
@@ -89,7 +97,7 @@ class SimplePresenter: CollectionPresenter {
             return section
         }()
         
-        collectionViewModel.reset(with: [bannersSection, familySection, menuSection])
+        collectionViewModel.reset(with: [testSection, bannersSection, familySection, menuSection])
     }
 
 }

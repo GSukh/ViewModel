@@ -45,7 +45,7 @@ class ViewModel<ViewType: UIView, ConfigurationType: ViewConfiguration<ViewType>
             view.frame = frame.addingOrigin(origin)
             configure(view: view)
             self.view = view
-            super.bind(toContainer: container, origin: .zero, viewStorage: viewStorage)
+            super.bind(toContainer: view, origin: .zero, viewStorage: viewStorage)
         } else {
             super.bind(toContainer: container, origin: origin, viewStorage: viewStorage)
         }
