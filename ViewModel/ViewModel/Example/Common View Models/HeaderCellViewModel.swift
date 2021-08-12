@@ -13,28 +13,25 @@ class HeaderCellViewModel: CellViewModel {
     init(title: String, buttonText: String) {
         super.init()
         
-        configureLayout { (layout) in
-            layout.flexDirection = .row
-            layout.justifyContent = .spaceBetween
-            layout.alignItems = .center
-            layout.height = 44.0
-            layout.paddingHorizontal = 12.0
+        layout {
+            $0.flexDirection = .row
+            $0.justifyContent = .spaceBetween
+            $0.alignItems = .center
+            $0.height = 44.0
+            $0.paddingHorizontal = 12.0
         }
         
-        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 16.0, weight: .medium)]
-        let titleViewModel = TextViewModel()
-        titleViewModel.attributedText = NSAttributedString(string: title, attributes: attributes)
-        add(titleViewModel)
-        
-        
-        let buttonViewModel = ButtonViewModel()
-        buttonViewModel.configuration.title = "Показать все"
-        buttonViewModel.configureLayout { (layout) in
-            layout.height = 20.0
-            layout.width = 150.0
+        childs {
+            TextViewModel(title)
+                .attributes([.font: UIFont.systemFont(ofSize: 16.0, weight: .medium)])
+            
+            ButtonViewModel()
+                .configure {
+                    $0.title = "Показать все"
+                }
+                .width(150.0)
+                .height(20.0)
         }
-        add(buttonViewModel)
-
     }
     
 }

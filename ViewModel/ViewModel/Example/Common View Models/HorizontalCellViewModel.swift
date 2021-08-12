@@ -15,17 +15,14 @@ class HorizontalCellViewModel: CellViewModel {
         super.init()
         
         let collectionViewModel = CollectionViewModel(scrollDirection: .horizontal)
+            .width(100%)
+            .height(100%)
         collectionViewModel.reset(with: sections)
-        collectionViewModel.configureLayout { (layout) in
-            layout.height = 100%
-            layout.width = 100%
-        }
         add(collectionViewModel)
         
-        configureLayout(withBlock: {
+        layout {
             $0.height = YGValue(height)
-        })
-        
+        }
     }
     
 }

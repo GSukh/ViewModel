@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1886C67F26C4194F00EE5D15 /* ViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */; };
 		18E50D262695F728001DA032 /* ScrollViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E50D252695F727001DA032 /* ScrollViewModel.swift */; };
 		18E50D2B2697021D001DA032 /* HListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E50D2A2697021D001DA032 /* HListCellViewModel.swift */; };
 		6AECD6109681EC5D602B0A36 /* Pods_ViewModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1D1AA9607DA1C851E4F8A0 /* Pods_ViewModel.framework */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		09C77CBEA998F95E9C6D477F /* Pods-ViewModel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViewModel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViewModel/Pods-ViewModel.debug.xcconfig"; sourceTree = "<group>"; };
+		1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBuilder.swift; sourceTree = "<group>"; };
 		18E50D252695F727001DA032 /* ScrollViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewModel.swift; sourceTree = "<group>"; };
 		18E50D2A2697021D001DA032 /* HListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HListCellViewModel.swift; sourceTree = "<group>"; };
 		2D164D57D63B6FB0515962A1 /* Pods-ViewModel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViewModel.release.xcconfig"; path = "Pods/Target Support Files/Pods-ViewModel/Pods-ViewModel.release.xcconfig"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				E58ABE9623F840510047056A /* ViewModel.swift */,
 				E58ABE9A23F840900047056A /* ViewStorage.swift */,
 				E531BB24245071F9005762C9 /* ViewConfiguration.swift */,
+				1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */,
 			);
 			path = "Base View Model";
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				E5F7FB07243F59C6001BB766 /* CollectionViewController.swift in Sources */,
 				E5DD54A2244DDBFD003F19A7 /* CollectionSection.swift in Sources */,
 				E531BB262450743C005762C9 /* ButtonViewModel.swift in Sources */,
+				1886C67F26C4194F00EE5D15 /* ViewModelBuilder.swift in Sources */,
 				E531BB2A24509652005762C9 /* HighlightableButton.swift in Sources */,
 				E5F1FE4C243C850900EC24BA /* SimpleViewController.swift in Sources */,
 				18E50D2B2697021D001DA032 /* HListCellViewModel.swift in Sources */,

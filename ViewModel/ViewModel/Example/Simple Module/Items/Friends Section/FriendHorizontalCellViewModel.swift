@@ -18,7 +18,7 @@ class FriendHorizontalCellViewModel: CellViewModel {
         self.title = title
         super.init()
         
-        configureLayout { (layout) in
+        layout { (layout) in
             layout.width = YGValue(FriendHorizontalCellViewModel.size.width)
             layout.height = YGValue(FriendHorizontalCellViewModel.size.height)
         }
@@ -28,40 +28,34 @@ class FriendHorizontalCellViewModel: CellViewModel {
             configuration.backgroundColor = .white
             configuration.zoom = true
             configuration.addTarget(self, action: #selector(handlePressed), for: .touchUpInside)
-        }) { (add) in
-            let avatarContainer = EmptyViewModel()
-            avatarContainer.add({
-                let avatarSize = CGSize(width: 28, height: 28)
-                let avatarViewModel = SimpleViewModel { (config) in
-                    config.backgroundColor = color
-                    config.cornerRadius = avatarSize.width / 2
+        }) {
+            EmptyViewModel()
+                .childs {
+                    SimpleViewModel { (config) in
+                        config.backgroundColor = color
+                        config.cornerRadius = 14.0
+                    }
+                    .layout { (layout) in
+                        layout.marginRight = 8.0
+                        layout.marginTop = 8.0
+                        layout.width = 28.0
+                        layout.height = 28.0
+                    }
                 }
-                avatarViewModel.configureLayout { (layout) in
-                    layout.marginRight = 8.0
-                    layout.marginTop = 8.0
-                    layout.width = YGValue(avatarSize.width)
-                    layout.height = YGValue(avatarSize.height)
+                .layout { (layout) in
+                    layout.flexDirection = .row
+                    layout.justifyContent = .flexEnd
                 }
-                return avatarViewModel
-            }())
-            avatarContainer.configureLayout { (layout) in
-                layout.flexDirection = .row
-                layout.justifyContent = .flexEnd
-            }
-            add(avatarContainer)
 
-
-            let textViewModel = TextViewModel()
-            let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 13)]
-            textViewModel.attributedText = NSAttributedString(string: title, attributes: attributes)
-            textViewModel.numberOfLines = 2
-            textViewModel.configureLayout { (layout) in
-                layout.marginHorizontal = 8.0
-                layout.marginBottom = 8.0
-            }
-            add(textViewModel)
+            TextViewModel(title)
+                .attributes([.font: UIFont.systemFont(ofSize: 13)])
+                .lines(2)
+                .layout { layout in
+                    layout.marginHorizontal = 8.0
+                    layout.marginBottom = 8.0
+                }
         }
-        buttonViewModel.configureLayout { (layout) in
+        buttonViewModel.layout { (layout) in
             layout.height = 100%
             layout.width = 100%
             layout.flexDirection = .column

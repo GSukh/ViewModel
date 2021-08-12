@@ -9,7 +9,6 @@
 import UIKit
 import YogaKit
 
-
 typealias SimpleViewModel = ViewModel<UIView, ViewConfiguration<UIView>>
 
 class ViewModel<ViewType: UIView, ConfigurationType: ViewConfiguration<ViewType>>: EmptyViewModel {
@@ -22,10 +21,18 @@ class ViewModel<ViewType: UIView, ConfigurationType: ViewConfiguration<ViewType>
         configurator(configuration)
     }
     
-    typealias AddViewModel = (EmptyViewModel) -> ()
-    convenience init(_ configurator: (ConfigurationType) -> (), constructor:(AddViewModel)->()) {
+    convenience init(_ configurator: (ConfigurationType) -> (), @ViewModelBuilder _ constructor: () -> [EmptyViewModel] ) {
         self.init(configurator)
-        constructor({self.add($0)})
+        let submodels = constructor()
+        for submodel in submodels {
+            add(submodel)
+        }
+//        constructor({self.add($0)})
+    }
+    
+    @discardableResult func configure(_ configurator: (ConfigurationType) -> ()) -> Self {
+        configurator(configuration)
+        return self
     }
     
     func createView() -> ViewType {

@@ -13,20 +13,23 @@ class FooterCellViewModel: CellViewModel {
     override init() {
         super.init()
         
-        configureLayout { (layout) in
+        layout { (layout) in
             layout.height = 20.0
         }
         
-        let separatorViewModel = SimpleViewModel()
-        separatorViewModel.configuration.backgroundColor = .gray
-        separatorViewModel.configureLayout { (layout) in
-            layout.position = .absolute
-            layout.bottom = 0.0
-            layout.left = 16.0
-            layout.right = 16.0
-            layout.height = 0.5
+        childs {
+            SimpleViewModel()
+            .configure {
+                $0.backgroundColor = .gray
+            }
+            .layout {
+                $0.position = .absolute
+                $0.bottom = 0.0
+                $0.left = 16.0
+                $0.right = 16.0
+                $0.height = 0.5
+            }
         }
-        add(separatorViewModel)
     }
     
 }

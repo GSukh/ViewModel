@@ -16,30 +16,26 @@ class BannerHorizontalCellViewModel: CellViewModel {
     init(color: UIColor) {
         super.init()
         
-        configureLayout { (layout) in
-            layout.width = YGValue(BannerHorizontalCellViewModel.size.width)
-            layout.height = YGValue(BannerHorizontalCellViewModel.size.height)
+        layout {
+            $0.width = YGValue(BannerHorizontalCellViewModel.size.width)
+            $0.height = YGValue(BannerHorizontalCellViewModel.size.height)
         }
         
-        let buttonViewModel = ButtonViewModel({ (config) in
-            config.cornerRadius = 8.0
-            config.backgroundColor = .white
-        }) { (add) in
-            let colorViewModel = SimpleViewModel { (config) in
-                config.backgroundColor = color
-                config.cornerRadius = 8.0
-            }
-            colorViewModel.configureLayout { (layout) in
-                layout.width = 100%
-                layout.height = 100%
-            }
-            add(colorViewModel)
+        childs {
+            ButtonViewModel()
+                .configure {
+                    $0.cornerRadius = 8.0
+                    $0.backgroundColor = .white
+                }
+                .childs {
+                    SimpleViewModel {
+                        $0.backgroundColor = color
+                        $0.cornerRadius = 8.0
+                    }
+                }
+                .width(100%)
+                .height(100%)
         }
-        buttonViewModel.configureLayout { (layout) in
-            layout.height = 100%
-            layout.width = 100%
-        }
-        add(buttonViewModel)
     }
     
 }

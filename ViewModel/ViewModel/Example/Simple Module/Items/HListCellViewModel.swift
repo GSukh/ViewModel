@@ -3,35 +3,32 @@ import Foundation
 class HListCellViewModel: CellViewModel {
     override init() {
         super.init()
-        let scrollViewModel = ScrollViewModel { config in
-            config.backgroundColor = .lightGray
-        }
         
-        for i in 0...10 {
-            scrollViewModel.add {
-                let squaredViewModel = SimpleViewModel()
-                squaredViewModel.configuration.backgroundColor = .blue
-                squaredViewModel.configureLayout { layout in
-                    layout.width = 100
-                    layout.height = 100
-                    layout.margin = 12
-                    layout.alignItems = .center
-                    layout.justifyContent = .center
+        childs {
+            ScrollViewModel { config in
+                config.backgroundColor = .lightGray
+            }
+            .layout {
+                $0.flexDirection = .row
+            }
+            .childs {
+                for i in 0...10 {
+                    SimpleViewModel()
+                        .configure {
+                            $0.backgroundColor = .blue
+                        }
+                        .layout {
+                            $0.width = 100
+                            $0.height = 100
+                            $0.margin = 12
+                            $0.alignItems = .center
+                            $0.justifyContent = .center
+                        }
+                        .childs {
+                            TextViewModel("\(i)")
+                        }
                 }
-                
-                squaredViewModel.add {
-                    let textViewModel = TextViewModel()
-                    textViewModel.attributedText = NSAttributedString(string: "\(i)")
-                    return textViewModel
-                }
-                
-                return squaredViewModel
             }
         }
-        
-        scrollViewModel.configureLayout { layout in
-            layout.flexDirection = .row
-        }
-        add(scrollViewModel)
     }
 }

@@ -35,9 +35,21 @@ class EmptyViewModel: NSObject {
         add(subview)
     }
     
-    func configureLayout(withBlock block: (YGLayout) -> ()) {
-        block(yoga)
+    @discardableResult func childs(@ViewModelBuilder _ constructor: () -> [EmptyViewModel]) -> Self {
+        let submodels = constructor()
+        for submodel in submodels {
+            if submodel === self {
+                fatalError("Trying to add view as it's subview")
+            }
+            add(submodel)
+        }
+        return self
+    }
+    
+     @discardableResult func layout(_ configurator: (YGLayout) -> ()) -> Self {
+        configurator(yoga)
         invalidateLayout()
+        return self
     }
     
     
@@ -121,4 +133,23 @@ extension EmptyViewModel: YGLayoutNode {
         self.frame = frame
     }
     
+}
+
+
+extension EmptyViewModel {
+    func width(_ w: YGValue) -> Self {
+        yoga.width = w
+        return self
+    }
+    
+    func height(_ h: YGValue) -> Self {
+        yoga.height = h
+        return self
+    }
+    
+    func size(_ size: CGSize) -> Self {
+        yoga.width = YGValue(size.width)
+        yoga.height = YGValue(size.height)
+        return self
+    }
 }
