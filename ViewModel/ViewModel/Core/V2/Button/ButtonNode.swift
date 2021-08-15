@@ -1,5 +1,5 @@
 //
-//  ScrollContainerNode.swift
+//  ButtonNode.swift
 //  ViewModel
 //
 //  Created by Grigoriy Sukhorukov on 15.08.2021.
@@ -8,14 +8,17 @@
 
 import YogaKit
 
-class ScrollContainerNode: ViewNode<UIScrollView> {
-    private var _subnodes: [BindableLayoutNode]
+class ButtonNode: ViewNode<HighlightableButton> {
+    private let targetActionStorage = TargetActionStorage()
+    
+    private let _subnodes: [BindableLayoutNode]
     override var subnodes: [YGLayoutNode] {
         return _subnodes
     }
     
-    private var contentOffset: CGPoint = .zero
-
+    typealias OnPressHandler = () -> Void
+    private var onPress: OnPressHandler?
+    
     required init(subnodes: [BindableLayoutNode]) {
         guard !subnodes.isEmpty else {
             fatalError()
@@ -29,6 +32,7 @@ class ScrollContainerNode: ViewNode<UIScrollView> {
         self.init(subnodes: subnodes)
     }
     
+    // MARK: - Overrides
     override func bind(to view: UIView, offset: CGPoint) {
         super.bind(to: view, offset: offset)
         
@@ -40,31 +44,39 @@ class ScrollContainerNode: ViewNode<UIScrollView> {
             node.bind(to: selfView, offset: .zero)
         }
     }
-    
-    override func configure(view: UIScrollView) {
-        super.configure(view: view)
-        view.showsVerticalScrollIndicator = false
-        view.showsHorizontalScrollIndicator = false
-        view.contentSize = yoga.intrinsicSize
-        view.contentOffset = contentOffset
-        view.isScrollEnabled = true
-        view.isUserInteractionEnabled = true
-    }
 
-    override func prepareToReuse(view: UIScrollView) {
+    override func configure(view: HighlightableButton) {
+        super.configure(view: view)
+        targetActionStorage.apply(toControl: view)
+        view.isUserInteractionEnabled = true
+        view.onPress = onPress
+    }
+    
+    override func prepareToReuse(view: HighlightableButton) {
         super.prepareToReuse(view: view)
-        contentOffset = view.contentOffset
+        targetActionStorage.prepareToReuse(control: view)
+    }
+    
+    // MARK: - Builders
+    func target(_ target: NSObject?, action: Selector, for controlEvents: UIControl.Event) -> Self {
+        targetActionStorage.addTarget(target, action: action, for: controlEvents)
+        return self
+    }
+    
+    func onPress(_ onPress: @escaping OnPressHandler) -> Self {
+        self.onPress = onPress
+        return self
     }
 }
 
-class HScrollContainer: ScrollContainerNode, YogaHContainerBuilder {
+class HButtonNode: ButtonNode, YogaHContainerBuilder {
     override func prepareYoga(_ layout: YGLayout) {
         super.prepareYoga(layout)
         layout.flexDirection = .row
     }
 }
 
-class VScrollContainer: ScrollContainerNode, YogaVContainerBuilder {
+class VButtonNode: ButtonNode, YogaVContainerBuilder {
     override func prepareYoga(_ layout: YGLayout) {
         super.prepareYoga(layout)
         layout.flexDirection = .column

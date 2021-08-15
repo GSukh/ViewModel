@@ -26,9 +26,6 @@ class HeaderCellViewModel: CellViewModel {
                 .attributes([.font: UIFont.systemFont(ofSize: 16.0, weight: .medium)])
             
             ButtonViewModel()
-                .configure {
-                    $0.title = "Показать все"
-                }
                 .width(150.0)
                 .height(20.0)
         }

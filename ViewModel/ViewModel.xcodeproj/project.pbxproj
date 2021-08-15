@@ -15,6 +15,8 @@
 		1832959726C972D300C1D1BD /* YogaPaddingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959626C972D300C1D1BD /* YogaPaddingBuilder.swift */; };
 		1832959926C972FA00C1D1BD /* YogaContainerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959826C972FA00C1D1BD /* YogaContainerBuilder.swift */; };
 		1832959C26C97DFF00C1D1BD /* ScrollContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959B26C97DFF00C1D1BD /* ScrollContainerNode.swift */; };
+		1832959F26C97FFF00C1D1BD /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959E26C97FFF00C1D1BD /* ButtonNode.swift */; };
+		183295A126C9806900C1D1BD /* TargetActionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183295A026C9806900C1D1BD /* TargetActionStorage.swift */; };
 		1886C67F26C4194F00EE5D15 /* ViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */; };
 		18D8D0A426C5768E00DED3FF /* LayoutNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0A326C5768E00DED3FF /* LayoutNode.swift */; };
 		18D8D0A626C57DA200DED3FF /* LayoutContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */; };
@@ -75,6 +77,8 @@
 		1832959626C972D300C1D1BD /* YogaPaddingBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaPaddingBuilder.swift; sourceTree = "<group>"; };
 		1832959826C972FA00C1D1BD /* YogaContainerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaContainerBuilder.swift; sourceTree = "<group>"; };
 		1832959B26C97DFF00C1D1BD /* ScrollContainerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollContainerNode.swift; sourceTree = "<group>"; };
+		1832959E26C97FFF00C1D1BD /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
+		183295A026C9806900C1D1BD /* TargetActionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetActionStorage.swift; sourceTree = "<group>"; };
 		1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBuilder.swift; sourceTree = "<group>"; };
 		18D8D0A326C5768E00DED3FF /* LayoutNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutNode.swift; sourceTree = "<group>"; };
 		18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutContainerNode.swift; sourceTree = "<group>"; };
@@ -174,6 +178,16 @@
 			path = Containers;
 			sourceTree = "<group>";
 		};
+		1832959D26C97FF000C1D1BD /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				1832959E26C97FFF00C1D1BD /* ButtonNode.swift */,
+				E531BB2924509652005762C9 /* HighlightableButton.swift */,
+				183295A026C9806900C1D1BD /* TargetActionStorage.swift */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
 		18D8D0A226C5765F00DED3FF /* V2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +195,7 @@
 				18D8D0A326C5768E00DED3FF /* LayoutNode.swift */,
 				18D8D0A726C5848900DED3FF /* ViewNode.swift */,
 				18D8D0AB26C5958500DED3FF /* Binder.swift */,
+				1832959D26C97FF000C1D1BD /* Button */,
 				1832959A26C97D2E00C1D1BD /* Containers */,
 				1832958C26C9661900C1D1BD /* Text */,
 			);
@@ -238,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				E531BB2224506AEF005762C9 /* ButtonViewModel.swift */,
-				E531BB2924509652005762C9 /* HighlightableButton.swift */,
 			);
 			path = "Button View Model";
 			sourceTree = "<group>";
@@ -595,6 +609,7 @@
 				E58ABE9723F840510047056A /* ViewModel.swift in Sources */,
 				E5DD54A5244DDFF8003F19A7 /* GridLayoutPattern.swift in Sources */,
 				1832959326C9728F00C1D1BD /* YogaSizeBuilder.swift in Sources */,
+				1832959F26C97FFF00C1D1BD /* ButtonNode.swift in Sources */,
 				E5B30E92244F2EB30094E3EC /* FriendHorizontalCellViewModel.swift in Sources */,
 				E55BEB0A242A1FF300E5BD97 /* Model.swift in Sources */,
 				18D8D0A826C5848900DED3FF /* ViewNode.swift in Sources */,
@@ -631,6 +646,7 @@
 				E5B30E8E244F2ADD0094E3EC /* ListModel.swift in Sources */,
 				1832959926C972FA00C1D1BD /* YogaContainerBuilder.swift in Sources */,
 				E5487F7823F84B2A0020D3ED /* CellViewModel.swift in Sources */,
+				183295A126C9806900C1D1BD /* TargetActionStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

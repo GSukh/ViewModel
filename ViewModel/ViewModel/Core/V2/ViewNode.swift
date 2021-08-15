@@ -20,6 +20,7 @@ class ViewNode<View: UIView>: LayoutNode, BindableNode, YogaSizeBuilder, YogaMar
     
     func configure(view: View) {
         view.backgroundColor = backgroundColor
+        view.isUserInteractionEnabled = false
     }
     
     func prepareToReuse(view: View) {
