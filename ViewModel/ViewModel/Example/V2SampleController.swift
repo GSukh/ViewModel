@@ -18,7 +18,7 @@ class V2SampleController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        HContainer {
+        HScrollContainer {
             for i in 0..<4 {
                 VLayoutContainer {
                     ViewNode<UIView>()

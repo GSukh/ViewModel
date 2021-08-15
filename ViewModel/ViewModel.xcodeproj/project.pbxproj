@@ -14,6 +14,7 @@
 		1832959526C972B800C1D1BD /* YogaMarginBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959426C972B800C1D1BD /* YogaMarginBuilder.swift */; };
 		1832959726C972D300C1D1BD /* YogaPaddingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959626C972D300C1D1BD /* YogaPaddingBuilder.swift */; };
 		1832959926C972FA00C1D1BD /* YogaContainerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959826C972FA00C1D1BD /* YogaContainerBuilder.swift */; };
+		1832959C26C97DFF00C1D1BD /* ScrollContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959B26C97DFF00C1D1BD /* ScrollContainerNode.swift */; };
 		1886C67F26C4194F00EE5D15 /* ViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */; };
 		18D8D0A426C5768E00DED3FF /* LayoutNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0A326C5768E00DED3FF /* LayoutNode.swift */; };
 		18D8D0A626C57DA200DED3FF /* LayoutContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */; };
@@ -73,6 +74,7 @@
 		1832959426C972B800C1D1BD /* YogaMarginBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaMarginBuilder.swift; sourceTree = "<group>"; };
 		1832959626C972D300C1D1BD /* YogaPaddingBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaPaddingBuilder.swift; sourceTree = "<group>"; };
 		1832959826C972FA00C1D1BD /* YogaContainerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaContainerBuilder.swift; sourceTree = "<group>"; };
+		1832959B26C97DFF00C1D1BD /* ScrollContainerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollContainerNode.swift; sourceTree = "<group>"; };
 		1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBuilder.swift; sourceTree = "<group>"; };
 		18D8D0A326C5768E00DED3FF /* LayoutNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutNode.swift; sourceTree = "<group>"; };
 		18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutContainerNode.swift; sourceTree = "<group>"; };
@@ -162,15 +164,24 @@
 			path = YogaBulders;
 			sourceTree = "<group>";
 		};
+		1832959A26C97D2E00C1D1BD /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */,
+				1832958F26C96FB900C1D1BD /* ContainerNode.swift */,
+				1832959B26C97DFF00C1D1BD /* ScrollContainerNode.swift */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
 		18D8D0A226C5765F00DED3FF /* V2 */ = {
 			isa = PBXGroup;
 			children = (
 				1832959126C9727700C1D1BD /* YogaBulders */,
 				18D8D0A326C5768E00DED3FF /* LayoutNode.swift */,
-				18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */,
 				18D8D0A726C5848900DED3FF /* ViewNode.swift */,
-				1832958F26C96FB900C1D1BD /* ContainerNode.swift */,
 				18D8D0AB26C5958500DED3FF /* Binder.swift */,
+				1832959A26C97D2E00C1D1BD /* Containers */,
 				1832958C26C9661900C1D1BD /* Text */,
 			);
 			path = V2;
@@ -579,6 +590,7 @@
 				E554AF1823FE90650009CF77 /* TextRenderer.swift in Sources */,
 				E53E3367243F796D00CE8431 /* GridCollectionViewLayout.swift in Sources */,
 				E554AF1623FE903C0009CF77 /* TextView.swift in Sources */,
+				1832959C26C97DFF00C1D1BD /* ScrollContainerNode.swift in Sources */,
 				E5BE45832451B657007429BD /* Router.swift in Sources */,
 				E58ABE9723F840510047056A /* ViewModel.swift in Sources */,
 				E5DD54A5244DDFF8003F19A7 /* GridLayoutPattern.swift in Sources */,

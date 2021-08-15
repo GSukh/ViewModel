@@ -17,6 +17,9 @@ class ContainerNode: ViewNode<UIView> {
     }
     
     required init(subnodes: [BindableLayoutNode]) {
+        guard !subnodes.isEmpty else {
+            fatalError()
+        }
         _subnodes = subnodes
         super.init()
     }

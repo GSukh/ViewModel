@@ -9,6 +9,9 @@
 import Foundation
 import YogaKit
 
+// Container without view
+// You can use it only to layout subviews
+
 typealias BindableLayoutNode = LayoutNode & BindableNode
 typealias LayoutBuilder = ResultBuilder<BindableLayoutNode>
 
@@ -20,6 +23,10 @@ class LayoutContainerNode: LayoutNode, BindableNode, YogaPaddingBuilder, YogaMar
     }
     
     required init(subnodes: [BindableLayoutNode]) {
+        guard !subnodes.isEmpty else {
+            fatalError()
+        }
+        
         _subnodes = subnodes
         super.init()
     }
