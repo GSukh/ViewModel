@@ -10,7 +10,7 @@ import UIKit
 
 class TextView: UIView {
     
-    var textRenderer: TextRenderer? {
+    var textRenderer: Renderable? {
         didSet {
             setNeedsDisplay()
         }

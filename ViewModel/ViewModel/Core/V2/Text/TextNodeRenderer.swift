@@ -1,23 +1,22 @@
 //
-//  TextRenderer.swift
+//  TextNodeView.swift
 //  ViewModel
 //
-//  Created by Григорий Сухоруков on 24/02/2020.
-//  Copyright © 2020 Григорий Сухоруков. All rights reserved.
+//  Created by Grigoriy Sukhorukov on 15.08.2021.
+//  Copyright © 2021 Григорий Сухоруков. All rights reserved.
 //
 
 import Foundation
 import CoreText
 
-protocol Renderable {
-    func sizeThatFits(_ size: CGSize) -> CGSize
-    func draw(inContext context: CGContext, withRect rect: CGRect)
-}
-
-class TextRenderer: Renderable {
+class TextNodeRenderer: Renderable {
     
-    let attributedText: NSAttributedString
-    var numberOfLines: Int
+    var attributedText: NSAttributedString {
+        didSet {
+            framesetter = CTFramesetterCreateWithAttributedString(attributedText)
+        }
+    }
+    var numberOfLines: Int = 0
     private var framesetter: CTFramesetter!
 
     init(_ attributedText: NSAttributedString) {

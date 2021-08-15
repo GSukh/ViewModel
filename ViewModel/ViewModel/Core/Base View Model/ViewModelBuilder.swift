@@ -9,28 +9,28 @@
 import Foundation
 
 @resultBuilder
-struct ViewModelBuilder {
-    static func buildBlock(_ settings: EmptyViewModel...) -> [EmptyViewModel] {
+struct ResultBuilder<Value> {
+    static func buildBlock(_ settings: Value...) -> [Value] {
         settings
     }
     
-    static func buildIf(_ value: EmptyViewModel?) -> [EmptyViewModel] {
+    static func buildIf(_ value: Value?) -> [Value] {
         value != nil ? [value!] : []
     }
     
-    static func buildEither(first: [EmptyViewModel]) -> [EmptyViewModel] {
+    static func buildEither(first: [Value]) -> [Value] {
         first
     }
 
-    static func buildEither(second: [EmptyViewModel]) -> [EmptyViewModel] {
+    static func buildEither(second: [Value]) -> [Value] {
         second
     }
     
-    static func buildBlock(_ components: [EmptyViewModel]...) -> [EmptyViewModel] {
+    static func buildBlock(_ components: [Value]...) -> [Value] {
         return components.flatMap({ $0 })
     }
     
-    static func buildArray(_ components: [[EmptyViewModel]]) -> [EmptyViewModel] {
+    static func buildArray(_ components: [[Value]]) -> [Value] {
         return components.flatMap({ $0 })
     }
 }

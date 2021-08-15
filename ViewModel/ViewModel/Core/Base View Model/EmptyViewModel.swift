@@ -9,6 +9,7 @@
 import UIKit
 import YogaKit
 
+typealias ViewModelBuilder = ResultBuilder<EmptyViewModel>
 
 class EmptyViewModel: NSObject {
 
