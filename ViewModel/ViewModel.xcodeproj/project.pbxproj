@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		1832958B26C9650800C1D1BD /* TextNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832958A26C9650800C1D1BD /* TextNode.swift */; };
 		1832958E26C9662500C1D1BD /* TextNodeRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832958D26C9662500C1D1BD /* TextNodeRenderer.swift */; };
+		1832959026C96FB900C1D1BD /* ContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832958F26C96FB900C1D1BD /* ContainerNode.swift */; };
+		1832959326C9728F00C1D1BD /* YogaSizeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959226C9728F00C1D1BD /* YogaSizeBuilder.swift */; };
+		1832959526C972B800C1D1BD /* YogaMarginBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959426C972B800C1D1BD /* YogaMarginBuilder.swift */; };
+		1832959726C972D300C1D1BD /* YogaPaddingBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959626C972D300C1D1BD /* YogaPaddingBuilder.swift */; };
+		1832959926C972FA00C1D1BD /* YogaContainerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1832959826C972FA00C1D1BD /* YogaContainerBuilder.swift */; };
 		1886C67F26C4194F00EE5D15 /* ViewModelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */; };
 		18D8D0A426C5768E00DED3FF /* LayoutNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0A326C5768E00DED3FF /* LayoutNode.swift */; };
-		18D8D0A626C57DA200DED3FF /* ContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0A526C57DA200DED3FF /* ContainerNode.swift */; };
+		18D8D0A626C57DA200DED3FF /* LayoutContainerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */; };
 		18D8D0A826C5848900DED3FF /* ViewNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0A726C5848900DED3FF /* ViewNode.swift */; };
 		18D8D0AC26C5958500DED3FF /* Binder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0AB26C5958500DED3FF /* Binder.swift */; };
 		18D8D0AE26C5988900DED3FF /* V2SampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D8D0AD26C5988900DED3FF /* V2SampleController.swift */; };
@@ -63,9 +68,14 @@
 		09C77CBEA998F95E9C6D477F /* Pods-ViewModel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViewModel.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ViewModel/Pods-ViewModel.debug.xcconfig"; sourceTree = "<group>"; };
 		1832958A26C9650800C1D1BD /* TextNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNode.swift; sourceTree = "<group>"; };
 		1832958D26C9662500C1D1BD /* TextNodeRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNodeRenderer.swift; sourceTree = "<group>"; };
+		1832958F26C96FB900C1D1BD /* ContainerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerNode.swift; sourceTree = "<group>"; };
+		1832959226C9728F00C1D1BD /* YogaSizeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaSizeBuilder.swift; sourceTree = "<group>"; };
+		1832959426C972B800C1D1BD /* YogaMarginBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaMarginBuilder.swift; sourceTree = "<group>"; };
+		1832959626C972D300C1D1BD /* YogaPaddingBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaPaddingBuilder.swift; sourceTree = "<group>"; };
+		1832959826C972FA00C1D1BD /* YogaContainerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaContainerBuilder.swift; sourceTree = "<group>"; };
 		1886C67E26C4194F00EE5D15 /* ViewModelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBuilder.swift; sourceTree = "<group>"; };
 		18D8D0A326C5768E00DED3FF /* LayoutNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutNode.swift; sourceTree = "<group>"; };
-		18D8D0A526C57DA200DED3FF /* ContainerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerNode.swift; sourceTree = "<group>"; };
+		18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutContainerNode.swift; sourceTree = "<group>"; };
 		18D8D0A726C5848900DED3FF /* ViewNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNode.swift; sourceTree = "<group>"; };
 		18D8D0AB26C5958500DED3FF /* Binder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binder.swift; sourceTree = "<group>"; };
 		18D8D0AD26C5988900DED3FF /* V2SampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = V2SampleController.swift; sourceTree = "<group>"; };
@@ -141,12 +151,25 @@
 			path = Text;
 			sourceTree = "<group>";
 		};
+		1832959126C9727700C1D1BD /* YogaBulders */ = {
+			isa = PBXGroup;
+			children = (
+				1832959226C9728F00C1D1BD /* YogaSizeBuilder.swift */,
+				1832959426C972B800C1D1BD /* YogaMarginBuilder.swift */,
+				1832959626C972D300C1D1BD /* YogaPaddingBuilder.swift */,
+				1832959826C972FA00C1D1BD /* YogaContainerBuilder.swift */,
+			);
+			path = YogaBulders;
+			sourceTree = "<group>";
+		};
 		18D8D0A226C5765F00DED3FF /* V2 */ = {
 			isa = PBXGroup;
 			children = (
+				1832959126C9727700C1D1BD /* YogaBulders */,
 				18D8D0A326C5768E00DED3FF /* LayoutNode.swift */,
-				18D8D0A526C57DA200DED3FF /* ContainerNode.swift */,
+				18D8D0A526C57DA200DED3FF /* LayoutContainerNode.swift */,
 				18D8D0A726C5848900DED3FF /* ViewNode.swift */,
+				1832958F26C96FB900C1D1BD /* ContainerNode.swift */,
 				18D8D0AB26C5958500DED3FF /* Binder.swift */,
 				1832958C26C9661900C1D1BD /* Text */,
 			);
@@ -546,6 +569,7 @@
 			files = (
 				E5B30E90244F2AEF0094E3EC /* ListCollectionPresenter.swift in Sources */,
 				E5487F7A23F84B3D0020D3ED /* CellView.swift in Sources */,
+				1832959726C972D300C1D1BD /* YogaPaddingBuilder.swift in Sources */,
 				E554AF1A23FE90700009CF77 /* TextViewModel.swift in Sources */,
 				E58ABE9B23F840900047056A /* ViewStorage.swift in Sources */,
 				E55BEB0C242A200700E5BD97 /* Presenter.swift in Sources */,
@@ -558,6 +582,7 @@
 				E5BE45832451B657007429BD /* Router.swift in Sources */,
 				E58ABE9723F840510047056A /* ViewModel.swift in Sources */,
 				E5DD54A5244DDFF8003F19A7 /* GridLayoutPattern.swift in Sources */,
+				1832959326C9728F00C1D1BD /* YogaSizeBuilder.swift in Sources */,
 				E5B30E92244F2EB30094E3EC /* FriendHorizontalCellViewModel.swift in Sources */,
 				E55BEB0A242A1FF300E5BD97 /* Model.swift in Sources */,
 				18D8D0A826C5848900DED3FF /* ViewNode.swift in Sources */,
@@ -567,7 +592,7 @@
 				E5DD54A2244DDBFD003F19A7 /* CollectionSection.swift in Sources */,
 				E531BB262450743C005762C9 /* ButtonViewModel.swift in Sources */,
 				1886C67F26C4194F00EE5D15 /* ViewModelBuilder.swift in Sources */,
-				18D8D0A626C57DA200DED3FF /* ContainerNode.swift in Sources */,
+				18D8D0A626C57DA200DED3FF /* LayoutContainerNode.swift in Sources */,
 				E531BB2A24509652005762C9 /* HighlightableButton.swift in Sources */,
 				E5F1FE4C243C850900EC24BA /* SimpleViewController.swift in Sources */,
 				1832958B26C9650800C1D1BD /* TextNode.swift in Sources */,
@@ -582,7 +607,9 @@
 				E58ABE8123F83E7A0047056A /* SceneDelegate.swift in Sources */,
 				18D8D0A426C5768E00DED3FF /* LayoutNode.swift in Sources */,
 				1832958E26C9662500C1D1BD /* TextNodeRenderer.swift in Sources */,
+				1832959526C972B800C1D1BD /* YogaMarginBuilder.swift in Sources */,
 				E5B30E9A244F516B0094E3EC /* BannerHorizontalCellViewModel.swift in Sources */,
+				1832959026C96FB900C1D1BD /* ContainerNode.swift in Sources */,
 				E55BEB0E242A205200E5BD97 /* ViewController.swift in Sources */,
 				18E50D262695F728001DA032 /* ScrollViewModel.swift in Sources */,
 				E5B30E97244F4EF50094E3EC /* FooterCellViewModel.swift in Sources */,
@@ -590,6 +617,7 @@
 				E5487F7423F84AE40020D3ED /* TableViewModel.swift in Sources */,
 				E5F1FE4E243C852500EC24BA /* SimplePresenter.swift in Sources */,
 				E5B30E8E244F2ADD0094E3EC /* ListModel.swift in Sources */,
+				1832959926C972FA00C1D1BD /* YogaContainerBuilder.swift in Sources */,
 				E5487F7823F84B2A0020D3ED /* CellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

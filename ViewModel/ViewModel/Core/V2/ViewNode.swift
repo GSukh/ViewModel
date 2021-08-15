@@ -9,9 +9,10 @@
 import UIKit
 import YogaKit
 
-class ViewNode<View: UIView>: LayoutNode, BindableNode, LayoutSize, LayoutMargin {
+class ViewNode<View: UIView>: LayoutNode, BindableNode, YogaSizeBuilder, YogaMarginBuilder {
     
     private var backgroundColor: UIColor?
+    private(set) weak var view: View?
     
     func createView() -> View {
         return View.init(frame: .zero)
@@ -31,11 +32,13 @@ class ViewNode<View: UIView>: LayoutNode, BindableNode, LayoutSize, LayoutMargin
         return self
     }
     
+    // MARK: - BindableNode
     func bind(to view: UIView, offset: CGPoint) {
         let _view = createView()
         configure(view: _view)
 
         view.addSubview(_view)
         _view.frame = frame.addingOrigin(offset)
+        self.view = _view
     }
 }
