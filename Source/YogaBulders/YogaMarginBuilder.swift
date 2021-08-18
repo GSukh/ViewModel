@@ -8,8 +8,8 @@
 
 import YogaKit
 
-protocol YogaMarginBuilder: YGLayoutNode {}
-extension YogaMarginBuilder {
+public protocol YogaMarginBuilder: YGLayoutNode {}
+public extension YogaMarginBuilder {
     func marginLeft(_ margin: YGValue) -> Self {
         yoga.marginLeft = margin
         return self

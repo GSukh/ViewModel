@@ -8,15 +8,15 @@
 
 import YogaKit
 
-class ScrollContainerNode: ViewNode<UIScrollView> {
-    private var _subnodes: [BindableLayoutNode]
-    override var subnodes: [YGLayoutNode] {
+open class ScrollContainerNode: ViewNode<UIScrollView> {
+    private var _subnodes: [LayoutNode]
+    public override var subnodes: [YGLayoutNode] {
         return _subnodes
     }
     
     private var contentOffset: CGPoint = .zero
 
-    required init(subnodes: [BindableLayoutNode]) {
+    public required init(subnodes: [LayoutNode]) {
         guard !subnodes.isEmpty else {
             fatalError()
         }
@@ -24,24 +24,32 @@ class ScrollContainerNode: ViewNode<UIScrollView> {
         super.init()
     }
     
-    convenience init(@LayoutBuilder _ constructor: () -> [BindableLayoutNode]) {
+    public convenience init(@LayoutBuilder _ constructor: () -> [LayoutNode]) {
         let subnodes = constructor()
         self.init(subnodes: subnodes)
     }
     
-    override func bind(to view: UIView, offset: CGPoint) {
-        super.bind(to: view, offset: offset)
+    open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
+        super.bind(from: viewStorage, to: view, offset: offset)
         
         guard let selfView = self.view else {
             fatalError()
         }
         
         for node in _subnodes {
-            node.bind(to: selfView, offset: .zero)
+            node.bind(from: viewStorage, to: selfView, offset: .zero)
         }
     }
     
-    override func configure(view: UIScrollView) {
+    open override func unbind(to viewStorage: ViewStorage) {
+        super.unbind(to: viewStorage)
+        
+        for node in _subnodes {
+            node.unbind(to: viewStorage)
+        }
+    }
+    
+    open override func configure(view: UIScrollView) {
         super.configure(view: view)
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
@@ -51,21 +59,21 @@ class ScrollContainerNode: ViewNode<UIScrollView> {
         view.isUserInteractionEnabled = true
     }
 
-    override func prepareToReuse(view: UIScrollView) {
+    open override func prepareToReuse(view: UIScrollView) {
         super.prepareToReuse(view: view)
         contentOffset = view.contentOffset
     }
 }
 
-class HScrollContainer: ScrollContainerNode, YogaHContainerBuilder {
-    override func prepareYoga(_ layout: YGLayout) {
+open class HScrollContainer: ScrollContainerNode, YogaHContainerBuilder {
+    open override func prepareYoga(_ layout: YGLayout) {
         super.prepareYoga(layout)
         layout.flexDirection = .row
     }
 }
 
-class VScrollContainer: ScrollContainerNode, YogaVContainerBuilder {
-    override func prepareYoga(_ layout: YGLayout) {
+open class VScrollContainer: ScrollContainerNode, YogaVContainerBuilder {
+    open override func prepareYoga(_ layout: YGLayout) {
         super.prepareYoga(layout)
         layout.flexDirection = .column
     }

@@ -9,7 +9,12 @@
 import Foundation
 import CoreText
 
-class TextNodeRenderer: Renderable {
+public protocol Renderable {
+    func sizeThatFits(_ size: CGSize) -> CGSize
+    func draw(inContext context: CGContext, withRect rect: CGRect)
+}
+
+open class TextNodeRenderer: Renderable {
     
     var attributedText: NSAttributedString {
         didSet {
@@ -25,7 +30,7 @@ class TextNodeRenderer: Renderable {
         self.framesetter = CTFramesetterCreateWithAttributedString(attributedText)
     }
     
-    func sizeThatFits(_ size: CGSize) -> CGSize {
+    public func sizeThatFits(_ size: CGSize) -> CGSize {
         var totalSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, 0), nil, size, nil)
         if numberOfLines == 0 {
             return totalSize
@@ -53,7 +58,7 @@ class TextNodeRenderer: Renderable {
         return totalSize
     }
     
-    func draw(inContext context: CGContext, withRect rect: CGRect) {
+    public func draw(inContext context: CGContext, withRect rect: CGRect) {
         let size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0, 0), nil, rect.size, nil)
         let path = CGPath(rect: CGRect(origin: .zero, size: size), transform: nil)
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)

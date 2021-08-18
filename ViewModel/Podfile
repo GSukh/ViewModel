@@ -6,6 +6,7 @@ target 'ViewModel' do
   use_frameworks!
 
   # Pods for ViewModel
-    pod 'YogaKit', :git => 'https://github.com/GSukh/yoga.git', :commit => '9918b4fd76ed53f20e1254373ada1fb64b209bbf'
+  pod 'YogaKit', :git => 'https://github.com/GSukh/yoga.git', :commit => '9918b4fd76ed53f20e1254373ada1fb64b209bbf'
+  pod 'YogaUI', :path => '../YogaUI.podspec'
 
 end

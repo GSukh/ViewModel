@@ -8,8 +8,8 @@
 
 import YogaKit
 
-protocol YogaPaddingBuilder: YGLayoutNode {}
-extension YogaPaddingBuilder {
+public protocol YogaPaddingBuilder: YGLayoutNode {}
+public extension YogaPaddingBuilder {
     func padding(_ value: CGFloat) -> Self {
         yoga.padding = YGValue(value)
         return self

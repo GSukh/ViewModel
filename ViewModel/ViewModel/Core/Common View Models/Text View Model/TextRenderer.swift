@@ -8,11 +8,7 @@
 
 import Foundation
 import CoreText
-
-protocol Renderable {
-    func sizeThatFits(_ size: CGSize) -> CGSize
-    func draw(inContext context: CGContext, withRect rect: CGRect)
-}
+import YogaUI
 
 class TextRenderer: Renderable {
     

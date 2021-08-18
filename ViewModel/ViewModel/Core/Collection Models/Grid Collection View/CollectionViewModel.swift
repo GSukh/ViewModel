@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YogaUI
 
 class CollectionViewModel: ViewModel<UICollectionView, ViewConfiguration<UICollectionView>> {
     

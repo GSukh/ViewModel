@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YogaUI
 
 class TextViewModel: ViewModel<TextView, ViewConfiguration<TextView>> {
     

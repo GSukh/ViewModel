@@ -6,23 +6,21 @@
 //  Copyright © 2021 Григорий Сухоруков. All rights reserved.
 //
 
-import Foundation
 import YogaKit
 
 // Container without view
 // You can use it only to layout subviews
 
-typealias BindableLayoutNode = LayoutNode & BindableNode
-typealias LayoutBuilder = ResultBuilder<BindableLayoutNode>
+typealias LayoutBuilder = ResultBuilder<LayoutNode>
 
-class LayoutContainerNode: LayoutNode, BindableNode, YogaPaddingBuilder, YogaMarginBuilder {
-    private var _subnodes: [BindableLayoutNode]
+open class LayoutContainerNode: LayoutNode, YogaPaddingBuilder, YogaMarginBuilder {
     
-    override var subnodes: [YGLayoutNode] {
+    private var _subnodes: [LayoutNode]
+    public override var subnodes: [YGLayoutNode] {
         return _subnodes
     }
     
-    required init(subnodes: [BindableLayoutNode]) {
+    required public init(subnodes: [LayoutNode]) {
         guard !subnodes.isEmpty else {
             fatalError()
         }
@@ -31,14 +29,24 @@ class LayoutContainerNode: LayoutNode, BindableNode, YogaPaddingBuilder, YogaMar
         super.init()
     }
     
-    convenience init(@LayoutBuilder _ constructor: () -> [BindableLayoutNode]) {
+    convenience init(@LayoutBuilder _ constructor: () -> [LayoutNode]) {
         let subnodes = constructor()
         self.init(subnodes: subnodes)
     }
     
-    func bind(to view: UIView, offset: CGPoint) {
+    open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
+        super.bind(from: viewStorage, to: view, offset: offset)
+        
         for node in _subnodes {
-            node.bind(to: view, offset: frame.origin)
+            node.bind(from: viewStorage, to: view, offset: frame.origin)
+        }
+    }
+    
+    open override func unbind(to viewStorage: ViewStorage) {
+        super.unbind(to: viewStorage)
+        
+        for node in _subnodes {
+            node.unbind(to: viewStorage)
         }
     }
 }

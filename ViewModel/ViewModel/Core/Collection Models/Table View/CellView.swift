@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YogaUI
 
 class CellView: UITableViewCell {
     

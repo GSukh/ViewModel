@@ -8,9 +8,9 @@
 
 import UIKit
 
-class TextView: UIView {
+open class TextView: UIView {
     
-    var textRenderer: Renderable? {
+    open var textRenderer: Renderable? {
         didSet {
             setNeedsDisplay()
         }
@@ -23,16 +23,16 @@ class TextView: UIView {
         layer.contentsGravity = .bottomLeft
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
         guard let textRenderer = textRenderer else { return .zero }
         return textRenderer.sizeThatFits(size)
     }
     
-    override func draw(_ rect: CGRect) {
+    open override func draw(_ rect: CGRect) {
         guard let textRenderer = textRenderer else { return }
         guard let context = UIGraphicsGetCurrentContext() else { return }
         

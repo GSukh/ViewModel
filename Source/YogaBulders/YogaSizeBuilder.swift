@@ -8,8 +8,8 @@
 
 import YogaKit
 
-protocol YogaSizeBuilder: YGLayoutNode {}
-extension YogaSizeBuilder {
+public protocol YogaSizeBuilder: YGLayoutNode {}
+public extension YogaSizeBuilder {
     func width(_ w: YGValue) -> Self {
         yoga.width = w
         return self

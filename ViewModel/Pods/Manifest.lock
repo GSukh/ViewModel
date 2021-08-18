@@ -2,18 +2,23 @@ PODS:
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
+  - YogaUI (0.0.1):
+    - YogaKit
 
 DEPENDENCIES:
   - YogaKit (from `https://github.com/GSukh/yoga.git`, commit `9918b4fd76ed53f20e1254373ada1fb64b209bbf`)
+  - YogaUI (from `../YogaUI.podspec`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Yoga
 
 EXTERNAL SOURCES:
   YogaKit:
     :commit: 9918b4fd76ed53f20e1254373ada1fb64b209bbf
     :git: https://github.com/GSukh/yoga.git
+  YogaUI:
+    :path: "../YogaUI.podspec"
 
 CHECKOUT OPTIONS:
   YogaKit:
@@ -22,8 +27,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
-  YogaKit: 0e730523c8b070562a389e47713d38debbc62129
+  YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
+  YogaUI: 1941527f2e999983c76b62f9fd3907c187f54c71
 
-PODFILE CHECKSUM: 02ffa9a24e299beafe8e02fe37184fa1fcca64d8
+PODFILE CHECKSUM: 8e0ddb1a3902904ff4c448ef5e1e1ec86373cc8e
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.2

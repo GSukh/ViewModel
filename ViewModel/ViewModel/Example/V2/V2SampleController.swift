@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import YogaUI
 
 class V2SampleController: UIViewController {
+    
+    private let viewStorage = ViewStorage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,13 +35,13 @@ class V2SampleController: UIViewController {
                     print("\(i)")
                 }
                 .marginHorizontal(6)
-                .itemsHorizontalPosition(.center)
+                .horizontalAlignment(.center)
             }
         }
         .backgroundColor(.yellow)
         .marginTop(124)
         .layout(in: CGSize(width: view.bounds.width, height: .nan))
-        .bind(to: view)
+        .bind(from: viewStorage, to: view)
     }
     
     @objc func didPressButton() {

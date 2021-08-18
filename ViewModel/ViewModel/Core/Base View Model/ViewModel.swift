@@ -8,6 +8,7 @@
 
 import UIKit
 import YogaKit
+import YogaUI
 
 typealias SimpleViewModel = ViewModel<UIView, ViewConfiguration<UIView>>
 

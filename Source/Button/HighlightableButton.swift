@@ -8,18 +8,17 @@
 
 import UIKit
 
-class HighlightableButton: UIControl {
+open class HighlightableButton: UIControl {
     
-    var zoomEnabled: Bool = false
-    typealias OnPressHandler = () -> Void
-    var onPress: OnPressHandler?
+    open var zoomEnabled: Bool = false
+    open var onPress: (() -> Void)?
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         addTarget(self, action: #selector(didPressOnButton), for: .touchUpInside)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         addTarget(self, action: #selector(didPressOnButton), for: .touchUpInside)
     }
@@ -28,7 +27,7 @@ class HighlightableButton: UIControl {
         removeTarget(self, action: #selector(didPressOnButton), for: .touchUpInside)
     }
     
-    override var isHighlighted: Bool {
+    open override var isHighlighted: Bool {
         didSet {
             let highlightChanged = isHighlighted != oldValue
             guard highlightChanged else { return }

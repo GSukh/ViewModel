@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import YogaUI
 
 typealias ButtonViewModel = ViewModel<HighlightableButton, ButtonConfiguration>
 

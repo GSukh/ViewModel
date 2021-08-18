@@ -8,18 +8,17 @@
 
 import YogaKit
 
-class ButtonNode: ViewNode<HighlightableButton> {
+open class ButtonNode: ViewNode<HighlightableButton> {
     private let targetActionStorage = TargetActionStorage()
     
-    private let _subnodes: [BindableLayoutNode]
-    override var subnodes: [YGLayoutNode] {
+    private let _subnodes: [LayoutNode]
+    public override var subnodes: [YGLayoutNode] {
         return _subnodes
     }
     
-    typealias OnPressHandler = () -> Void
-    private var onPress: OnPressHandler?
+    private var onPress: (() -> Void)?
     
-    required init(subnodes: [BindableLayoutNode]) {
+    required public init(subnodes: [LayoutNode]) {
         guard !subnodes.isEmpty else {
             fatalError()
         }
@@ -27,57 +26,65 @@ class ButtonNode: ViewNode<HighlightableButton> {
         super.init()
     }
     
-    convenience init(@LayoutBuilder _ constructor: () -> [BindableLayoutNode]) {
+    public convenience init(@LayoutBuilder _ constructor: () -> [LayoutNode]) {
         let subnodes = constructor()
         self.init(subnodes: subnodes)
     }
     
     // MARK: - Overrides
-    override func bind(to view: UIView, offset: CGPoint) {
-        super.bind(to: view, offset: offset)
+    open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
+        super.bind(from: viewStorage, to: view, offset: offset)
         
         guard let selfView = self.view else {
             fatalError()
         }
         
         for node in _subnodes {
-            node.bind(to: selfView, offset: .zero)
+            node.bind(from: viewStorage, to: selfView, offset: .zero)
+        }
+    }
+    
+    open override func unbind(to viewStorage: ViewStorage) {
+        super.unbind(to: viewStorage)
+        
+        for node in _subnodes {
+            node.unbind(to: viewStorage)
         }
     }
 
-    override func configure(view: HighlightableButton) {
+    open override func configure(view: HighlightableButton) {
         super.configure(view: view)
         targetActionStorage.apply(toControl: view)
         view.isUserInteractionEnabled = true
         view.onPress = onPress
     }
     
-    override func prepareToReuse(view: HighlightableButton) {
+    open override func prepareToReuse(view: HighlightableButton) {
         super.prepareToReuse(view: view)
         targetActionStorage.prepareToReuse(control: view)
     }
     
     // MARK: - Builders
-    func target(_ target: NSObject?, action: Selector, for controlEvents: UIControl.Event) -> Self {
+    open func target(_ target: NSObject?, action: Selector, for controlEvents: UIControl.Event) -> Self {
         targetActionStorage.addTarget(target, action: action, for: controlEvents)
         return self
     }
     
-    func onPress(_ onPress: @escaping OnPressHandler) -> Self {
+    open func onPress(_ onPress: @escaping () -> Void) -> Self {
         self.onPress = onPress
         return self
     }
 }
 
-class HButtonNode: ButtonNode, YogaHContainerBuilder {
-    override func prepareYoga(_ layout: YGLayout) {
+open class HButtonNode: ButtonNode, YogaHContainerBuilder {
+    public override func prepareYoga(_ layout: YGLayout) {
         super.prepareYoga(layout)
         layout.flexDirection = .row
     }
 }
 
-class VButtonNode: ButtonNode, YogaVContainerBuilder {
-    override func prepareYoga(_ layout: YGLayout) {
+open class VButtonNode: ButtonNode, YogaVContainerBuilder {
+    public override func prepareYoga(_ layout: YGLayout) {
         super.prepareYoga(layout)
         layout.flexDirection = .column
     }

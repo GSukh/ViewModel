@@ -32,6 +32,7 @@
   "source_files": "YogaKit/Source/*.{h,m,swift}",
   "public_header_files": "YogaKit/Source/{YGLayout,UIView+Yoga}.h",
   "private_header_files": "YogaKit/Source/YGLayout+Private.h",
-  "swift_version": "5.1",
-  "readme": "YogaKit/README.md"
+  "swift_versions": "5.1",
+  "readme": "YogaKit/README.md",
+  "swift_version": "5.1"
 }

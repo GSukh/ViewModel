@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextNode: ViewNode<TextView> {
+open class TextNode: ViewNode<TextView> {
     
     private let text: String
     private var textRenderer: TextNodeRenderer
@@ -18,29 +18,29 @@ class TextNode: ViewNode<TextView> {
     private var lineHeight: CGFloat? = nil
     private var textColor: UIColor = .black
     
-    init(_ text: String) {
+    public init(_ text: String) {
         self.text = text
         self.textRenderer = TextNodeRenderer(NSAttributedString(string: text))
         super.init()
     }
     
     // MARK: - Setters
-    func numberOfLines(_ numberOfLines: Int) -> Self {
+    open func numberOfLines(_ numberOfLines: Int) -> Self {
         self.numberOfLines = numberOfLines
         return self
     }
     
-    func font(_ font: UIFont) -> Self {
+    open func font(_ font: UIFont) -> Self {
         self.font = font
         return self
     }
     
-    func lineHeight(_ lineHeight: CGFloat) -> Self {
+    open func lineHeight(_ lineHeight: CGFloat) -> Self {
         self.lineHeight = lineHeight
         return self
     }
     
-    func textColor(_ textColor: UIColor) -> Self {
+    open func textColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
         return self
     }
@@ -67,19 +67,20 @@ class TextNode: ViewNode<TextView> {
     }
     
     // MARK: - Overrides
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
+    public override func sizeThatFits(_ size: CGSize) -> CGSize {
         updateRenderer()
-        return textRenderer.sizeThatFits(size)
+        let size = textRenderer.sizeThatFits(size)
+        return size
     }
     
-    override func configure(view: TextView) {
+    open override func configure(view: TextView) {
         super.configure(view: view)
         updateRenderer()
         view.textRenderer = textRenderer
         view.backgroundColor = .clear
     }
     
-    override func prepareToReuse(view: TextView) {
+    open override func prepareToReuse(view: TextView) {
         super.prepareToReuse(view: view)
         view.textRenderer = nil
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TargetAction: Hashable {
+public class TargetAction: Hashable {
     
     weak var target: NSObject?
     let action: Selector
@@ -20,7 +20,7 @@ class TargetAction: Hashable {
         self.controlEvents = controlEvents
     }
     
-    static func == (lhs: TargetAction, rhs: TargetAction) -> Bool {
+    public static func == (lhs: TargetAction, rhs: TargetAction) -> Bool {
         if lhs.target != rhs.target {
             return false
         }
@@ -33,33 +33,35 @@ class TargetAction: Hashable {
         return true
     }
     
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(target)
         hasher.combine(action)
         hasher.combine(Int(controlEvents.rawValue))
     }
 }
 
-class TargetActionStorage {
+public class TargetActionStorage {
+    public init() {}
+    
     private var targetActions = Set<TargetAction>()
     
-    func addTarget(_ target: NSObject?, action: Selector, for controlEvents: UIControl.Event) {
+    public func addTarget(_ target: NSObject?, action: Selector, for controlEvents: UIControl.Event) {
         let targetAction = TargetAction(target, action: action, for: controlEvents)
         targetActions.insert(targetAction)
     }
     
-    func removeTarget(_ target: NSObject?, action: Selector, for controlEvents: UIControl.Event) {
+    public func removeTarget(_ target: NSObject?, action: Selector, for controlEvents: UIControl.Event) {
         let targetAction = TargetAction(target, action: action, for: controlEvents)
         targetActions.remove(targetAction)
     }
     
-    func apply(toControl control: UIControl) {
+    public func apply(toControl control: UIControl) {
         targetActions.forEach { (handler) in
             control.addTarget(handler.target, action: handler.action, for: handler.controlEvents)
         }
     }
     
-    func prepareToReuse(control: UIControl) {
+    public func prepareToReuse(control: UIControl) {
         targetActions.forEach { (handler) in
             control.removeTarget(handler.target, action: handler.action, for: handler.controlEvents)
         }

@@ -6,8 +6,8 @@
 //  Copyright © 2020 Григорий Сухоруков. All rights reserved.
 //
 
-import UIKit
 import YogaKit
+import YogaUI
 
 typealias ViewModelBuilder = ResultBuilder<EmptyViewModel>
 
