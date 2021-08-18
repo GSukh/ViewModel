@@ -10,6 +10,21 @@ import YogaKit
 
 public protocol YogaMarginBuilder: YGLayoutNode {}
 public extension YogaMarginBuilder {
+    func margin(_ margin: YGValue) -> Self {
+        yoga.margin = margin
+        return self
+    }
+    
+    func marginHorizontal(_ margin: YGValue) -> Self {
+        yoga.marginHorizontal = margin
+        return self
+    }
+    
+    func marginVertical(_ margin: YGValue) -> Self {
+        yoga.marginVertical = margin
+        return self
+    }
+    
     func marginLeft(_ margin: YGValue) -> Self {
         yoga.marginLeft = margin
         return self
@@ -27,21 +42,6 @@ public extension YogaMarginBuilder {
     
     func marginBottom(_ margin: YGValue) -> Self {
         yoga.marginBottom = margin
-        return self
-    }
-    
-    func margin(_ margin: YGValue) -> Self {
-        yoga.margin = margin
-        return self
-    }
-    
-    func marginHorizontal(_ margin: YGValue) -> Self {
-        yoga.marginHorizontal = margin
-        return self
-    }
-    
-    func marginVertical(_ margin: YGValue) -> Self {
-        yoga.marginVertical = margin
         return self
     }
 }

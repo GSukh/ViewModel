@@ -8,7 +8,7 @@
 
 import YogaKit
 
-open class ContainerNode: ViewNode<UIView> {
+open class ContainerNode: ViewNode<UIView>, YogaPaddingBuilder {
     
     private var _subnodes: [LayoutNode]
     public override var subnodes: [YGLayoutNode] {

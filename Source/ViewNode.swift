@@ -28,6 +28,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         view.layer.cornerRadius = cornerRadius
         view.layer.borderWidth = borderWidth
         view.layer.borderColor = borderColor?.cgColor
+        view.clipsToBounds = true
     }
     
     open func prepareToReuse(view: View) {
@@ -73,13 +74,9 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         return self
     }
     
-    open func borderWidth(_ borderWidth: CGFloat) -> Self {
-        self.borderWidth = borderWidth
-        return self
-    }
-    
-    open func borderColor(_ borderColor: UIColor) -> Self {
-        self.borderColor = borderColor
+    open func border(width: CGFloat, color: UIColor) -> Self {
+        self.borderWidth = width
+        self.borderColor = color
         return self
     }
     

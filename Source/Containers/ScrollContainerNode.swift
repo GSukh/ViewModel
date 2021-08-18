@@ -8,7 +8,7 @@
 
 import YogaKit
 
-open class ScrollContainerNode: ViewNode<UIScrollView> {
+open class ScrollContainerNode: ViewNode<UIScrollView>, YogaPaddingBuilder {
     private var _subnodes: [LayoutNode]
     public override var subnodes: [YGLayoutNode] {
         return _subnodes
