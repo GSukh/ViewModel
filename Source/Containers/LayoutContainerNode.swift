@@ -29,7 +29,7 @@ open class LayoutContainerNode: LayoutNode, YogaPaddingBuilder, YogaMarginBuilde
         super.init()
     }
     
-    convenience init(@LayoutBuilder _ constructor: () -> [LayoutNode]) {
+    public convenience init(@LayoutBuilder _ constructor: () -> [LayoutNode]) {
         let subnodes = constructor()
         self.init(subnodes: subnodes)
     }
@@ -51,15 +51,15 @@ open class LayoutContainerNode: LayoutNode, YogaPaddingBuilder, YogaMarginBuilde
     }
 }
 
-class HLayoutContainer: LayoutContainerNode, YogaHContainerBuilder {
-    override func prepareYoga(_ layout: YGLayout) {
+open class HLayoutContainer: LayoutContainerNode, YogaHContainerBuilder {
+    public override func prepareYoga(_ layout: YGLayout) {
         super.prepareYoga(layout)
         layout.flexDirection = .row
     }
 }
 
-class VLayoutContainer: LayoutContainerNode, YogaVContainerBuilder {
-    override func prepareYoga(_ layout: YGLayout) {
+open class VLayoutContainer: LayoutContainerNode, YogaVContainerBuilder {
+    public override func prepareYoga(_ layout: YGLayout) {
         super.prepareYoga(layout)
         layout.flexDirection = .column
     }

@@ -11,11 +11,12 @@ import YogaKit
 open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilder {
     
     private var backgroundColor: UIColor?
+    private var cornerRadius: CGFloat = 0.0
+    private var borderWidth: CGFloat = 0.0
+    private var borderColor: UIColor?
+    private var userInteractionEnabled: Bool = false
+
     private(set) weak var view: View?
-    
-//    public override init() {
-//        super.init()
-//    }
     
     func createView() -> View {
         return View.init(frame: .zero)
@@ -23,11 +24,18 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     
     open func configure(view: View) {
         view.backgroundColor = backgroundColor
-        view.isUserInteractionEnabled = false
+        view.isUserInteractionEnabled = userInteractionEnabled
+        view.layer.cornerRadius = cornerRadius
+        view.layer.borderWidth = borderWidth
+        view.layer.borderColor = borderColor?.cgColor
     }
     
     open func prepareToReuse(view: View) {
         view.backgroundColor = nil
+        view.isUserInteractionEnabled = false
+        view.layer.cornerRadius = 0.0
+        view.layer.borderWidth = 0.0
+        view.layer.borderColor = nil
     }
     
     open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
@@ -57,6 +65,26 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     // MARK: - Builders
     open func backgroundColor(_ color: UIColor) -> Self {
         backgroundColor = color
+        return self
+    }
+    
+    open func cornerRadius(_ cornerRadius: CGFloat) -> Self {
+        self.cornerRadius = cornerRadius
+        return self
+    }
+    
+    open func borderWidth(_ borderWidth: CGFloat) -> Self {
+        self.borderWidth = borderWidth
+        return self
+    }
+    
+    open func borderColor(_ borderColor: UIColor) -> Self {
+        self.borderColor = borderColor
+        return self
+    }
+    
+    open func userInteractionEnabled(_ userInteractionEnabled: Bool) -> Self {
+        self.userInteractionEnabled = userInteractionEnabled
         return self
     }
 }
