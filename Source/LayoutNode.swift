@@ -8,7 +8,7 @@
 
 import YogaKit
 
-open class LayoutNode: NSObject, YGLayoutNode {
+open class LayoutNode: NSObject, YGLayoutNode, YogaPositioningBuilder {
     private var _yoga: YGLayout!
     public var yoga: YGLayout! {
         return _yoga
