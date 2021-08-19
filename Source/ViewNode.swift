@@ -18,7 +18,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
 
     private(set) weak var view: View?
     
-    func createView() -> View {
+    open func createView() -> View {
         return View.init(frame: .zero)
     }
     

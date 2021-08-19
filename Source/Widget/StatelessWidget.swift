@@ -8,12 +8,12 @@
 
 import UIKit
 
-open class StatelessWidget: Widget {
+open class StatelessWidget: NSObject, Widget {
     
     private var lastNode: LayoutNode?
     private var lastNodeContextHash: Int?
     
-    public init() {}
+//    public init() {}
     
     open func build(forContext context: WidgetRenderContext) -> LayoutNode {
         fatalError()
