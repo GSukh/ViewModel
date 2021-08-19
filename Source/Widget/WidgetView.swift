@@ -52,6 +52,7 @@ public class WidgetView: UIView {
     
     private var widget: Widget?
     private var layoutNode: LayoutNode?
+    private(set) var lastContext: WidgetRenderContext?
 
     public func setWidget(_ widget: Widget, withContext context: WidgetRenderContext) {
         removeWidget()
@@ -69,6 +70,7 @@ public class WidgetView: UIView {
         node.bind(from: viewStorage, to: self)
         layoutNode = node
         self.widget = widget
+        self.lastContext = context
     }
     
     public func removeWidget() {
@@ -78,5 +80,6 @@ public class WidgetView: UIView {
         }
         layoutNode = nil
         widget = nil
+        lastContext = nil
     }
 }

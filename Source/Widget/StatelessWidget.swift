@@ -12,9 +12,7 @@ open class StatelessWidget: NSObject, Widget {
     
     private var lastNode: LayoutNode?
     private var lastNodeContextHash: Int?
-    
-//    public init() {}
-    
+        
     open func build(forContext context: WidgetRenderContext) -> LayoutNode {
         fatalError()
     }
@@ -44,6 +42,17 @@ open class StatelessWidget: NSObject, Widget {
         let node = node(forContext: context)
         node.layout(in: context.layoutSize)
         return node.frame.size
+    }
+    
+    public func rebuild() {
+        // Придумать лучшую реализацию ребилда
+        // Вынести виджет с ребилдом в StatefullWidget
+        guard let lastNode = lastNode else { return }
+        guard let widgetView = lastNode.superView as? WidgetView else { return }
+        guard let widgetContext = widgetView.lastContext else { return }
+        
+        lastNodeContextHash = nil
+        widgetView.setWidget(self, withContext: widgetContext)
     }
     
     public var cellIdentifier: String {
