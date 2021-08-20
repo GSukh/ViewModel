@@ -17,6 +17,7 @@
 		15E01019CEEFB32BD69D17D7FD4D264E /* YogaKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F47411A8758E692BAC554385ED369E11 /* YogaKit-dummy.m */; };
 		1699ECB522301164897C02A725A7EAD3 /* log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C355E9A92DF387605AA944288A633400 /* log.cpp */; settings = {COMPILER_FLAGS = "-fno-omit-frame-pointer -fexceptions -Wall -Werror -std=c++1y -fPIC -fno-objc-arc"; }; };
 		189FC1F726CEBA5400A27AE5 /* YogaPositioningBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189FC1F626CEBA5400A27AE5 /* YogaPositioningBuilder.swift */; };
+		18FEB83E26CFBA85006EA6A5 /* ImageNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FEB83C26CFBA43006EA6A5 /* ImageNode.swift */; };
 		195E16F8D251FA6EA304022B26F32E7D /* YGEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 4077F4FF65FFDBFCFA2BFBA33D6917EC /* YGEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		20F7A1637AEF5C0A74D21CBD23224208 /* instrumentation.h in Headers */ = {isa = PBXBuildFile; fileRef = BF7151E35F179D86AE7D00834B3756BD /* instrumentation.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		22BD3F816584934BD1A9DDABB8E2FEA5 /* YGNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F5D19BBF0F7CF165C4AD103912D345 /* YGNode.cpp */; settings = {COMPILER_FLAGS = "-fno-omit-frame-pointer -fexceptions -Wall -Werror -std=c++1y -fPIC -fno-objc-arc"; }; };
@@ -127,6 +128,7 @@
 		173A1391E88CCC571C901C5629D9A4ED /* YogaKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = YogaKit.modulemap; sourceTree = "<group>"; };
 		189FC1F626CEBA5400A27AE5 /* YogaPositioningBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaPositioningBuilder.swift; sourceTree = "<group>"; };
 		18DC53BBCE451F2A49272EA9EBD50B72 /* YGStyle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGStyle.h; path = yoga/YGStyle.h; sourceTree = "<group>"; };
+		18FEB83C26CFBA43006EA6A5 /* ImageNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNode.swift; sourceTree = "<group>"; };
 		2232001E1DB1986C632B1C8CA055191F /* YogaKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "YogaKit-umbrella.h"; sourceTree = "<group>"; };
 		283B9753ACA60B3DF81B21D93E285FFB /* YGLayout.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGLayout.h; path = YogaKit/Source/YGLayout.h; sourceTree = "<group>"; };
 		296B9F109A322493AABCDA22927758CD /* YGFloatOptional.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = YGFloatOptional.h; path = yoga/YGFloatOptional.h; sourceTree = "<group>"; };
@@ -267,6 +269,14 @@
 			path = "../Target Support Files/YogaKit";
 			sourceTree = "<group>";
 		};
+		18FEB83B26CFBA23006EA6A5 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				18FEB83C26CFBA43006EA6A5 /* ImageNode.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
 		202BB25CFCFC9177C2F8EBC1415B12FA /* Yoga */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,13 +344,14 @@
 				5DBFD07DC8E6ADA2D659E5A90DD71D27 /* ResultBuilder.swift */,
 				7151C52D1AFC69780DADAF3E58603F73 /* ViewNode.swift */,
 				12F195C2FCCE2E1D715A5ABD28E90C83 /* ViewStorage.swift */,
-				66F712939DEEF2D48FB5D7988B9D98C8 /* Button */,
-				844A56C8D2ED77B8BA7720A095C14F75 /* Containers */,
-				F5C422F08EABB29F37FD779E5830D170 /* Pod */,
-				58EFC492BA6436EB10CBE13C1306A6B5 /* Support Files */,
-				EB230B2A90978F5B1B548E69ABB4BA7D /* Text */,
 				4B31D80456750A2FFECFA1EFE0D4292E /* Widget */,
 				6086B53CBCA9C11363B7164AF765BC36 /* YogaBulders */,
+				EB230B2A90978F5B1B548E69ABB4BA7D /* Text */,
+				66F712939DEEF2D48FB5D7988B9D98C8 /* Button */,
+				844A56C8D2ED77B8BA7720A095C14F75 /* Containers */,
+				18FEB83B26CFBA23006EA6A5 /* Image */,
+				F5C422F08EABB29F37FD779E5830D170 /* Pod */,
+				58EFC492BA6436EB10CBE13C1306A6B5 /* Support Files */,
 			);
 			name = YogaUI;
 			path = ../..;
@@ -657,6 +668,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					5613ED60F1BC8499AE7D4A9B45352816 = {
+						LastSwiftMigration = 1250;
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -742,6 +758,7 @@
 				965F736C68C4C0BD12688B9174E2FAA4 /* YogaContainerBuilder.swift in Sources */,
 				AFF779C8A80EA32A3EBD2CCC390DC533 /* YogaMarginBuilder.swift in Sources */,
 				7596D09D9451C6F5D2FE30F112C83EE3 /* YogaPaddingBuilder.swift in Sources */,
+				18FEB83E26CFBA85006EA6A5 /* ImageNode.swift in Sources */,
 				C7FBAED2E78CD924DE87C0E7E0EA82CA /* YogaSizeBuilder.swift in Sources */,
 				84ADF7DD19583CAC584DD5ACE7209892 /* YogaUI-dummy.m in Sources */,
 			);
@@ -1048,6 +1065,7 @@
 			baseConfigurationReference = C5C799F7AFF2F3A72E736CE6BFA5C96A /* Pods-ViewModel.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1074,6 +1092,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1155,6 +1174,7 @@
 			baseConfigurationReference = C88FE9E7CCD6A14C36A2B72BEA40713D /* Pods-ViewModel.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1181,6 +1201,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

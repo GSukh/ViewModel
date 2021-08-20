@@ -12,12 +12,14 @@ public enum ContainerHorizontalAlignment {
     case left
     case center
     case right
+    case spaceBetween
 }
 
 public enum ContainerVerticalAlignment {
     case top
     case center
     case bottom
+    case spaceBetween
 }
 
 public protocol YogaContainerBuilder: YGLayoutNode {
@@ -43,6 +45,7 @@ public extension YogaHContainerBuilder {
         case .top: return .flexStart
         case .center: return .center
         case .bottom: return .flexEnd
+        case .spaceBetween: return .spaceBetween
         }
     }
     
@@ -51,6 +54,7 @@ public extension YogaHContainerBuilder {
         case .left: return .flexStart
         case .center: return .center
         case .right: return .flexEnd
+        case .spaceBetween: return .spaceBetween
         }
     }
 }
@@ -73,6 +77,7 @@ public extension YogaVContainerBuilder {
         case .left: return .flexStart
         case .center: return .center
         case .right: return .flexEnd
+        case .spaceBetween: return .spaceBetween
         }
     }
     
@@ -81,6 +86,7 @@ public extension YogaVContainerBuilder {
         case .top: return .flexStart
         case .center: return .center
         case .bottom: return .flexEnd
+        case .spaceBetween: return .spaceBetween
         }
     }
 }
