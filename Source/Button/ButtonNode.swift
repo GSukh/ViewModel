@@ -8,7 +8,7 @@
 
 import YogaKit
 
-open class ButtonNode: ViewNode<HighlightableButton> {
+open class ButtonNode: ViewNode<HighlightableButton>, YogaPaddingBuilder {
     private let targetActionStorage = TargetActionStorage()
     
     private let _subnodes: [LayoutNode]
