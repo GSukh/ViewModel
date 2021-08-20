@@ -31,7 +31,7 @@ open class ImageNode: ViewNode<UIImageView> {
     
     // MARK: - Builders
     open func tintColor(_ color: UIColor) -> Self {
-        self.tintColor = tintColor
+        self.tintColor = color
         return self
     }
 }
