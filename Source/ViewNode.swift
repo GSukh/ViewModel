@@ -16,7 +16,10 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     private var borderColor: UIColor?
     private var userInteractionEnabled: Bool = false
 
-    private(set) weak var view: View?
+    private weak var _view: View?
+    open var view: View? {
+        return _view
+    }
     
     open func createView() -> View {
         return View.init(frame: .zero)
@@ -41,12 +44,12 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     
     open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
         super.bind(from: viewStorage, to: view, offset: offset)
-        let _view: View = viewStorage.dequeue(viewWithIdentifier: viewIdentifier) ?? createView()
-        configure(view: _view)
+        let newView: View = viewStorage.dequeue(viewWithIdentifier: viewIdentifier) ?? createView()
+        configure(view: newView)
 
-        view.addSubview(_view)
-        _view.frame = frame.addingOrigin(offset)
-        self.view = _view
+        view.addSubview(newView)
+        newView.frame = frame.addingOrigin(offset)
+        _view = newView
     }
     
     open override func unbind(to viewStorage: ViewStorage) {
@@ -56,7 +59,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
 
         view.removeFromSuperview()
         viewStorage.enqueue(view: view, withIdentifier: viewIdentifier)
-        self.view = nil
+        _view = nil
     }
     
     private var viewIdentifier: String {
