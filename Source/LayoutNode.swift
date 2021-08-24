@@ -77,3 +77,15 @@ public extension LayoutNode {
         bind(from: viewStorage, to: view, offset: .zero)
     }
 }
+
+public extension LayoutNode {
+    func shrink() -> Self {
+        yoga.flexShrink = 1.0
+        return self
+    }
+    
+    func grow() -> Self {
+        yoga.flexGrow = 1.0
+        return self
+    }
+}
