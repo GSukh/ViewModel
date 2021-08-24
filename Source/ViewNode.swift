@@ -15,6 +15,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     private var borderWidth: CGFloat = 0.0
     private var borderColor: UIColor?
     private var userInteractionEnabled: Bool = false
+    private var contentMode: UIView.ContentMode = .scaleToFill
 
     private weak var _view: View?
     open var view: View? {
@@ -32,6 +33,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         view.layer.borderWidth = borderWidth
         view.layer.borderColor = borderColor?.cgColor
         view.clipsToBounds = true
+        view.contentMode = contentMode
     }
     
     open func prepareToReuse(view: View) {
@@ -40,6 +42,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         view.layer.cornerRadius = 0.0
         view.layer.borderWidth = 0.0
         view.layer.borderColor = nil
+        view.contentMode = .scaleToFill
     }
     
     open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
@@ -85,6 +88,11 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     
     open func userInteractionEnabled(_ userInteractionEnabled: Bool) -> Self {
         self.userInteractionEnabled = userInteractionEnabled
+        return self
+    }
+    
+    open func contentMode(_ contentMode: UIView.ContentMode) -> Self {
+        self.contentMode = contentMode
         return self
     }
 }
