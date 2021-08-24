@@ -37,8 +37,12 @@ open class LayoutContainerNode: LayoutNode, YogaPaddingBuilder, YogaMarginBuilde
     open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
         super.bind(from: viewStorage, to: view, offset: offset)
         
+        var childOffset = frame.origin
+        childOffset.x += offset.x
+        childOffset.y += offset.y
+
         for node in _subnodes {
-            node.bind(from: viewStorage, to: view, offset: frame.origin)
+            node.bind(from: viewStorage, to: view, offset: childOffset)
         }
     }
     
