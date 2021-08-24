@@ -8,6 +8,13 @@
 
 import YogaKit
 
+struct Shadow {
+    let color: UIColor
+    let opacity: Float
+    let offset: CGSize
+    let radius: CGFloat
+}
+
 open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilder {
     
     private var backgroundColor: UIColor?
@@ -16,6 +23,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     private var borderColor: UIColor?
     private var userInteractionEnabled: Bool = false
     private var contentMode: UIView.ContentMode = .scaleToFill
+    private var shadow: Shadow?
 
     private weak var _view: View?
     open var view: View? {
@@ -34,6 +42,13 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         view.layer.borderColor = borderColor?.cgColor
         view.clipsToBounds = true
         view.contentMode = contentMode
+        if let shadow = shadow {
+            view.layer.shadowColor = shadow.color.cgColor
+            view.layer.shadowOpacity = shadow.opacity
+            view.layer.shadowOffset = shadow.offset
+            view.layer.shadowRadius = shadow.radius
+            view.clipsToBounds = false
+        }
     }
     
     open func prepareToReuse(view: View) {
@@ -43,6 +58,14 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         view.layer.borderWidth = 0.0
         view.layer.borderColor = nil
         view.contentMode = .scaleToFill
+        
+        if shadow != nil {
+            view.layer.shadowColor = nil
+            view.layer.shadowOpacity = 0.0
+            view.layer.shadowOffset = CGSize(width: 0, height: -3)
+            view.layer.shadowRadius = 3
+            view.clipsToBounds = false
+        }
     }
     
     open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
@@ -93,6 +116,11 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     
     open func contentMode(_ contentMode: UIView.ContentMode) -> Self {
         self.contentMode = contentMode
+        return self
+    }
+    
+    open func shadow(color: UIColor, opacity: Float, offset: CGSize, radius: CGFloat) -> Self {
+        shadow = Shadow(color: color, opacity: opacity, offset: offset, radius: radius)
         return self
     }
 }
