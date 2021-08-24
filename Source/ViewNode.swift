@@ -19,6 +19,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     
     private var backgroundColor: UIColor?
     private var cornerRadius: CGFloat = 0.0
+    private var maskedCorners: CACornerMask = .all
     private var borderWidth: CGFloat = 0.0
     private var borderColor: UIColor?
     private var userInteractionEnabled: Bool = false
@@ -38,6 +39,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         view.backgroundColor = backgroundColor
         view.isUserInteractionEnabled = userInteractionEnabled
         view.layer.cornerRadius = cornerRadius
+        view.layer.maskedCorners = maskedCorners
         view.layer.borderWidth = borderWidth
         view.layer.borderColor = borderColor?.cgColor
         view.clipsToBounds = true
@@ -55,6 +57,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         view.backgroundColor = nil
         view.isUserInteractionEnabled = false
         view.layer.cornerRadius = 0.0
+        view.layer.maskedCorners = []
         view.layer.borderWidth = 0.0
         view.layer.borderColor = nil
         view.contentMode = .scaleToFill
@@ -97,9 +100,14 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         backgroundColor = color
         return self
     }
-    
+
     open func cornerRadius(_ cornerRadius: CGFloat) -> Self {
+        return self.cornerRadius(cornerRadius, maskedCorners: .all)
+    }
+    
+    open func cornerRadius(_ cornerRadius: CGFloat, maskedCorners: CACornerMask) -> Self {
         self.cornerRadius = cornerRadius
+        self.maskedCorners = maskedCorners
         return self
     }
     
@@ -130,5 +138,11 @@ extension CGRect {
         let x = self.origin.x + origin.x
         let y = self.origin.y + origin.y
         return CGRect(x: x, y: y, width: width, height: height)
+    }
+}
+
+extension CACornerMask {
+    static var all: CACornerMask {
+        return [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner, .layerMaxXMinYCorner]
     }
 }
