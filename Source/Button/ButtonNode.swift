@@ -24,6 +24,7 @@ open class ButtonNode: ViewNode<HighlightableButton>, YogaPaddingBuilder {
         }
         _subnodes = subnodes
         super.init()
+        _ = userInteractionEnabled(true)
     }
     
     public convenience init(@LayoutBuilder _ constructor: () -> [LayoutNode]) {
@@ -55,7 +56,6 @@ open class ButtonNode: ViewNode<HighlightableButton>, YogaPaddingBuilder {
     open override func configure(view: HighlightableButton) {
         super.configure(view: view)
         targetActionStorage.apply(toControl: view)
-        view.isUserInteractionEnabled = true
         view.onPress = onPress
     }
     
