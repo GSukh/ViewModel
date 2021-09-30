@@ -17,6 +17,7 @@ open class TextNode: ViewNode<TextView> {
     private var font: UIFont = UIFont.systemFont(ofSize: 15)
     private var lineHeight: CGFloat? = nil
     private var textColor: UIColor = .black
+    private var isHTML: Bool = false
     
     public init(_ text: String) {
         self.text = text
@@ -35,6 +36,11 @@ open class TextNode: ViewNode<TextView> {
         return self
     }
     
+    open func systemFont(ofSize size: CGFloat, weight: UIFont.Weight) -> Self {
+        self.font = UIFont.systemFont(ofSize: size, weight: weight)
+        return self
+    }
+    
     open func lineHeight(_ lineHeight: CGFloat) -> Self {
         self.lineHeight = lineHeight
         return self
@@ -42,6 +48,11 @@ open class TextNode: ViewNode<TextView> {
     
     open func textColor(_ textColor: UIColor) -> Self {
         self.textColor = textColor
+        return self
+    }
+    
+    open func markHTML() -> Self {
+        self.isHTML = true
         return self
     }
     
@@ -61,8 +72,18 @@ open class TextNode: ViewNode<TextView> {
         return NSAttributedString(string: text, attributes: attributes)
     }
     
+    private func attributedHTMLText() -> NSAttributedString {
+        let height = lineHeight ?? font.lineHeight
+        let attributedHTMLString = text.htmlAttributedString(size: font.pointSize, color: textColor, lineHeight: height)
+        return attributedHTMLString ?? attributedText()
+    }
+    
     private func updateRenderer() {
-        textRenderer.attributedText = attributedText()
+        if isHTML {
+            textRenderer.attributedText = attributedHTMLText()
+        } else {
+            textRenderer.attributedText = attributedText()
+        }
         textRenderer.numberOfLines = numberOfLines
     }
     
