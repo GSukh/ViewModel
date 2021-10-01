@@ -26,5 +26,6 @@ class HTMLSampleWidget: StatelessWidget {
                 .margin(20)
         }
         .backgroundColor(.orange)
+        .identifier("html_sample")
     }
 }

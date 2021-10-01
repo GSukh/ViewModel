@@ -25,6 +25,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     private var userInteractionEnabled: Bool = false
     private var contentMode: UIView.ContentMode = .scaleToFill
     private var shadow: Shadow?
+    private var identifier: String?
 
     private weak var _view: View?
     open var view: View? {
@@ -51,6 +52,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
             view.layer.shadowRadius = shadow.radius
             view.clipsToBounds = false
         }
+        view.accessibilityIdentifier = identifier
     }
     
     open func prepareToReuse(view: View) {
@@ -61,7 +63,6 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
         view.layer.borderWidth = 0.0
         view.layer.borderColor = nil
         view.contentMode = .scaleToFill
-        
         if shadow != nil {
             view.layer.shadowColor = nil
             view.layer.shadowOpacity = 0.0
@@ -69,6 +70,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
             view.layer.shadowRadius = 3
             view.clipsToBounds = false
         }
+        view.accessibilityIdentifier = nil
     }
     
     open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
@@ -129,6 +131,11 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
     
     open func shadow(color: UIColor, opacity: Float, offset: CGSize, radius: CGFloat) -> Self {
         shadow = Shadow(color: color, opacity: opacity, offset: offset, radius: radius)
+        return self
+    }
+    
+    open func identifier(_ identifier: String) -> Self {
+        self.identifier = identifier
         return self
     }
 }
