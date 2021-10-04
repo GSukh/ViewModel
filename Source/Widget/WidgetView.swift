@@ -12,6 +12,7 @@ public protocol Widget: AnyObject {
     func node(forContext context: WidgetRenderContext) -> LayoutNode
     func size(forContext context: WidgetRenderContext) -> CGSize
     var cellIdentifier: String { get }
+    var accessibilityIdentifier: String? { get }
 }
 
 public struct WidgetRenderContext: Hashable {
@@ -56,6 +57,7 @@ public class WidgetView: UIView {
 
     public func setWidget(_ widget: Widget, withContext context: WidgetRenderContext) {
         removeWidget()
+        accessibilityIdentifier = widget.accessibilityIdentifier
         
         let node = widget.node(forContext: context)
         if node.superView != nil {

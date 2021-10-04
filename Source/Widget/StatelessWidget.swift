@@ -12,6 +12,7 @@ open class StatelessWidget: NSObject, Widget {
     
     private var lastNode: LayoutNode?
     private var lastNodeContextHash: Int?
+    public var accessibilityIdentifier: String?
         
     open func build(forContext context: WidgetRenderContext) -> LayoutNode {
         fatalError()
