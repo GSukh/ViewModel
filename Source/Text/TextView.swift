@@ -21,6 +21,7 @@ open class TextView: UIView {
         backgroundColor = .clear
         clipsToBounds = true
         layer.contentsGravity = .bottomLeft
+        accessibilityTraits = .staticText
     }
     
     required public init?(coder: NSCoder) {

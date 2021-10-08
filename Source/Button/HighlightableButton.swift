@@ -15,16 +15,21 @@ open class HighlightableButton: UIControl {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        addTarget(self, action: #selector(didPressOnButton), for: .touchUpInside)
+        setup()
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
-        addTarget(self, action: #selector(didPressOnButton), for: .touchUpInside)
+        setup()
     }
     
     deinit {
         removeTarget(self, action: #selector(didPressOnButton), for: .touchUpInside)
+    }
+    
+    open func setup() {
+        accessibilityTraits = .button
+        addTarget(self, action: #selector(didPressOnButton), for: .touchUpInside)
     }
     
     open override var isHighlighted: Bool {
