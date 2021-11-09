@@ -99,10 +99,12 @@ open class TextNode: ViewNode<TextView> {
         updateRenderer()
         view.textRenderer = textRenderer
         view.backgroundColor = .clear
+        view.accessibilityLabel = text
     }
     
     open override func prepareToReuse(view: TextView) {
         super.prepareToReuse(view: view)
         view.textRenderer = nil
+        view.accessibilityLabel = nil
     }
 }
