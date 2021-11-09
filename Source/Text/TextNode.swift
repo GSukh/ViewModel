@@ -100,6 +100,7 @@ open class TextNode: ViewNode<TextView> {
         view.textRenderer = textRenderer
         view.backgroundColor = .clear
         view.accessibilityLabel = text
+        view.isAccessibilityElement = true
     }
     
     open override func prepareToReuse(view: TextView) {
