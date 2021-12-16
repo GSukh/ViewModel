@@ -53,6 +53,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
             view.clipsToBounds = false
         }
         view.accessibilityIdentifier = identifier
+        view.isAccessibilityElement = identifier != nil
     }
     
     open func prepareToReuse(view: View) {
@@ -71,6 +72,7 @@ open class ViewNode<View: UIView>: LayoutNode, YogaSizeBuilder, YogaMarginBuilde
             view.clipsToBounds = false
         }
         view.accessibilityIdentifier = nil
+        view.isAccessibilityElement = false
     }
     
     open override func bind(from viewStorage: ViewStorage, to view: UIView, offset: CGPoint) {
