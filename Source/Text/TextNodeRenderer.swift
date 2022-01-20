@@ -16,15 +16,15 @@ public protocol Renderable {
 
 open class TextNodeRenderer: Renderable {
     
-    var attributedText: NSAttributedString {
+    public var attributedText: NSAttributedString {
         didSet {
             framesetter = CTFramesetterCreateWithAttributedString(attributedText)
         }
     }
-    var numberOfLines: Int = 0
+    public var numberOfLines: Int = 0
     private var framesetter: CTFramesetter!
 
-    init(_ attributedText: NSAttributedString) {
+    public init(_ attributedText: NSAttributedString) {
         self.attributedText = attributedText
         self.numberOfLines = 0
         self.framesetter = CTFramesetterCreateWithAttributedString(attributedText)

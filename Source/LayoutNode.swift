@@ -48,7 +48,7 @@ open class LayoutNode: NSObject, YGLayoutNode, YogaPositioningBuilder {
         return false
     }
     
-    public func sizeThatFits(_ size: CGSize) -> CGSize {
+    open func sizeThatFits(_ size: CGSize) -> CGSize {
         return .zero
     }
     
