@@ -45,6 +45,10 @@ open class StatelessWidget: NSObject, Widget {
         return node.frame.size
     }
     
+    public func invalidateLayout() {
+        lastNode = nil
+    }
+    
     public func rebuild() {
         // Придумать лучшую реализацию ребилда
         // Вынести виджет с ребилдом в StatefullWidget
