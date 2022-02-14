@@ -20,6 +20,11 @@ extension String {
                 color: \(color.hexString ?? "#000000");
                 font-family: -apple-system;
                 font-size: \(size)px;
+                line-height: \(lineHeight)px;
+              }
+              body, h1, h2, h3, p {
+                margin: 0;
+                padding: 0;
               }
             </style>
           </head>
