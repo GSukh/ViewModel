@@ -9,6 +9,7 @@ import Foundation
 
 extension String {
     func htmlAttributedString(size: CGFloat, color: UIColor, lineHeight: CGFloat) -> NSAttributedString? {
+        guard !isEmpty else { return nil }
         let htmlTemplate = """
         <!doctype html>
         <html>
