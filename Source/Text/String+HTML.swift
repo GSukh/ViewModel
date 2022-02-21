@@ -10,6 +10,7 @@ import Foundation
 extension String {
     func htmlAttributedString(size: CGFloat, color: UIColor, lineHeight: CGFloat) -> NSAttributedString? {
         guard !isEmpty else { return nil }
+        let fixedText = components(separatedBy: "&nbsp;").joined(separator: " ")
         let htmlTemplate = """
         <!doctype html>
         <html>
@@ -30,7 +31,7 @@ extension String {
             </style>
           </head>
           <body>
-            \(self)
+            \(fixedText)
           </body>
         </html>
         """
